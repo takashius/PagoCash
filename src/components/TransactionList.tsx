@@ -85,7 +85,7 @@ export default TransactionList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 0,
     backgroundColor: "#F9F9F9",
   },
   list: {
