@@ -1,27 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { Alert, StyleSheet, Text, View } from 'react-native';
-import Login from './src/screens/Login';
-import Dashboard from './src/components/Dashboard';
-import { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { PaperProvider } from 'react-native-paper';
+import { I18nextProvider } from 'react-i18next';
+import AppNavigator from './src/navigation/AppNavigator';
+import { UserProvider } from './src/context/UserContext';
+import i18n from './src/i18n';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    // Acción al iniciar sesión
-    setIsLoggedIn(true);
-    Alert.alert("Sesión iniciada", "¡Bienvenido a Pago Cash!");
-  };
-
-  const handleSwitchToRegister = () => {
-    // Acción para cambiar a la pantalla de registro
-    Alert.alert("Registro", "Pantalla de registro no implementada.");
-  };
+  const queryClient = new QueryClient();
 
   return (
-    <Dashboard
-      onLogout={handleLogin}
-    />
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider>
+        <I18nextProvider i18n={i18n}>
+          <UserProvider>
+            <AppNavigator />
+          </UserProvider>
+        </I18nextProvider>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }
 

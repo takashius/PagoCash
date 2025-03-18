@@ -12,10 +12,6 @@ import TransactionList from "./TransactionList";
 import QRCode from "./QRCode";
 import { Feather } from "@expo/vector-icons";
 
-interface DashboardProps {
-  onLogout: () => void;
-}
-
 interface Transaction {
   id: string;
   type: "incoming" | "outgoing";
@@ -24,7 +20,7 @@ interface Transaction {
   date: string;
 }
 
-const Dashboard = ({ onLogout }: DashboardProps) => {
+const Dashboard = () => {
   const [balance, setBalance] = useState(1250.75);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [showQR, setShowQR] = useState(false);
@@ -165,7 +161,7 @@ const Dashboard = ({ onLogout }: DashboardProps) => {
                 <Text style={styles.sectionTitle}>Mi perfil</Text>
                 <Text style={styles.profileInfo}>Nombre: María González</Text>
                 <Text style={styles.profileInfo}>Correo: maria@email.com</Text>
-                <CustomButton onPress={onLogout} style={styles.logoutButton}>
+                <CustomButton style={styles.logoutButton}>
                   Cerrar sesión
                 </CustomButton>
               </View>

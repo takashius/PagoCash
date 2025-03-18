@@ -9,26 +9,16 @@ import {
 } from "react-native";
 import { Checkbox } from "../components/ui/checkbox";
 import { CustomButton } from "../components/ui/custom-button";
-import { useToast } from "../hooks/use-toast";
 
-interface LoginProps {
-  onLogin: () => void;
-  onSwitchToRegister: () => void;
-}
-
-const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  // const { toast } = useToast();
 
   const handleLogin = async () => {
     if (!username || !password) {
-      // toast({
-      //   title: "Error",
-      //   description: "Por favor complete todos los campos.",
-      // });
+      Alert.alert("Error", "Por favor complete todos los campos");
       return;
     }
 
@@ -37,11 +27,7 @@ const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
     // Simular llamada a API
     setTimeout(() => {
       setIsLoading(false);
-      // toast({
-      //   title: "Éxito",
-      //   description: "Sesión iniciada correctamente.",
-      // });
-      onLogin();
+      Alert.alert("Sesión iniciada", "¡Bienvenido a Pago Cash!");
     }, 1500);
   };
 
@@ -72,11 +58,7 @@ const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
         <View style={styles.formGroup}>
           <View style={styles.passwordHeader}>
             <Text style={styles.label}>Contraseña</Text>
-            <TouchableOpacity
-            // onPress={() =>
-            //   toast({ description: "Función de recuperación no implementada" })
-            // }
-            >
+            <TouchableOpacity>
               <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
             </TouchableOpacity>
           </View>
@@ -106,7 +88,7 @@ const Login = ({ onLogin, onSwitchToRegister }: LoginProps) => {
         {/* Alternar a registro */}
         <Text style={styles.registerPrompt}>
           ¿No tienes una cuenta?{" "}
-          <TouchableOpacity onPress={onSwitchToRegister}>
+          <TouchableOpacity>
             <Text style={styles.registerLink}>Regístrate</Text>
           </TouchableOpacity>
         </Text>
