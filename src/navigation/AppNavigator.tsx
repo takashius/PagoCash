@@ -8,6 +8,7 @@ import HomeScreen from "../screens/Home";
 import Transactions from "../screens/Transactions";
 import Profile from "../screens/Profile";
 import MyQR from "../screens/MyQR";
+import QRScanner from "../components/QRScanner";
 import Login from "../screens/Login";
 import { Home, List, User } from "lucide-react-native";
 import { useUser } from "../context/UserContext";
@@ -22,6 +23,13 @@ const AppNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="QR" component={MyQR} options={{ headerTitle: "Mi código QR" }} />
+    </Stack.Navigator>
+  );
+
+  const HomeStack = () => (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="QRScanner" component={QRScanner} />
     </Stack.Navigator>
   );
 
@@ -41,7 +49,7 @@ const AppNavigator = () => {
                   case "Movimientos":
                     IconComponent = List;
                     break;
-                  case "Perfil":
+                  case "Profile":
                     IconComponent = User;
                     break;
                   default:
@@ -65,7 +73,7 @@ const AppNavigator = () => {
           >
             <Tab.Screen
               name="Inicio"
-              component={HomeScreen}
+              component={HomeStack}
               options={{
                 headerShown: false,
                 tabBarLabel: "Inicio",

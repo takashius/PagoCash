@@ -75,7 +75,7 @@ export default function HomeScreen() {
 
             <TouchableOpacity
               style={styles.card}
-              onPress={() => alert("Función de escaneo no implementada")}
+              onPress={() => navigation.navigate("QRScanner")}
             >
               <Feather
                 name="search"
