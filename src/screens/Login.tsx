@@ -9,8 +9,10 @@ import {
 } from "react-native";
 import { Checkbox } from "../components/ui/checkbox";
 import { CustomButton } from "../components/ui/custom-button";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
+  const { login } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +29,11 @@ const Login = () => {
     // Simular llamada a API
     setTimeout(() => {
       setIsLoading(false);
-      Alert.alert("Sesión iniciada", "¡Bienvenido a Pago Cash!");
+      login({
+        email: "takashi.onimaru@gmail.com",
+        name: 'Usuario Ejemplo',
+        token: 'fake-token',
+      });
     }, 1500);
   };
 
@@ -81,7 +87,7 @@ const Login = () => {
         </View>
 
         {/* Botón de inicio de sesión */}
-        <CustomButton onPress={handleLogin} loading={isLoading} style={styles.button}>
+        <CustomButton onPress={handleLogin} loading={isLoading}>
           Iniciar Sesión
         </CustomButton>
 
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     fontSize: 12,
-    color: "#007BFF",
+    color: "#2ECC71",
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -160,7 +166,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   button: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#2ECC71",
     borderRadius: 8,
     padding: 15,
     alignItems: "center",
@@ -172,7 +178,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   registerLink: {
-    color: "#007BFF",
+    color: "#2ECC71",
     fontWeight: "bold",
   },
 });

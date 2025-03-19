@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { Feather } from "@expo/vector-icons";
 import TransactionList from '../components/TransactionList';
+import { useNavigation } from '@react-navigation/native';
 
 interface Transaction {
   id: string;
@@ -13,7 +14,7 @@ interface Transaction {
 
 export default function HomeScreen() {
   const [balance, setBalance] = useState(1250.75);
-  const [showQR, setShowQR] = useState(false);
+  const navigation: any = useNavigation();
 
   const mockTransactions = [
     {
@@ -87,7 +88,7 @@ export default function HomeScreen() {
 
             <TouchableOpacity
               style={styles.card}
-              onPress={() => setShowQR(true)}
+              onPress={() => navigation.navigate("Profile", { screen: "QR" })}
             >
               <Feather
                 name="camera"
@@ -127,7 +128,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: "#F9F9F9",
   },
   scrollContainer: {
     flex: 1,
@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   dashboard: {
     flex: 1,
     padding: 20,
+    paddingBottom: 0
   },
   balanceLabel: {
     textAlign: "center",

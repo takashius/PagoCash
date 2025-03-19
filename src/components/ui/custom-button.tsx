@@ -23,7 +23,7 @@ interface ButtonProps {
 
 const variants: Record<string, ViewStyle> = {
   default: {
-    backgroundColor: "#333",
+    backgroundColor: "#2ECC71",
     borderColor: "transparent",
   },
   primary: {

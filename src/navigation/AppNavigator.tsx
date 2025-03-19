@@ -6,14 +6,24 @@ import { Provider as PaperProvider } from "react-native-paper";
 import CustomTheme from "../utils/CustomTheme";
 import HomeScreen from "../screens/Home";
 import Transactions from "../screens/Transactions";
+import Profile from "../screens/Profile";
+import MyQR from "../screens/MyQR";
 import Login from "../screens/Login";
 import { Home, List, User } from "lucide-react-native";
+import { useUser } from "../context/UserContext";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  const user = true;
+  const { user } = useUser();
+
+  const ProfileStack = () => (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="QR" component={MyQR} options={{ headerTitle: "Mi código QR" }} />
+    </Stack.Navigator>
+  );
 
   return (
     <PaperProvider theme={CustomTheme}>
@@ -40,7 +50,7 @@ const AppNavigator = () => {
 
                 return <IconComponent color={color} size={size} />;
               },
-              tabBarActiveTintColor: "#ff7f50",
+              tabBarActiveTintColor: "#2ECC71",
               tabBarInactiveTintColor: "gray",
               tabBarStyle: {
                 backgroundColor: "white",
@@ -49,7 +59,7 @@ const AppNavigator = () => {
                 height: 80,
                 paddingTop: 12,
               },
-              headerStyle: { backgroundColor: "#ff7f50" },
+              headerStyle: { backgroundColor: "#2ECC71" },
               headerTintColor: "white",
             })}
           >
@@ -69,11 +79,11 @@ const AppNavigator = () => {
                 headerTitle: "Movimientos",
               }} />
             <Tab.Screen
-              name="Perfil"
-              component={HomeScreen}
+              name="Profile"
+              component={ProfileStack}
               options={{
                 tabBarLabel: "Perfil",
-                headerTitle: "",
+                headerTitle: "Mi perfil",
               }} />
           </Tab.Navigator>
         ) : (

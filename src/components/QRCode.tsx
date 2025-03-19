@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, Image, StyleSheet, ActivityIndicator, TouchableOpacity, Share } from "react-native";
 
 const QRCode = ({ accountId, name }: { accountId: string; name: string }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [qrImage, setQrImage] = useState<string | null>(null);
-  console.log('DATA', accountId, name)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -19,15 +18,25 @@ const QRCode = ({ accountId, name }: { accountId: string; name: string }) => {
     return () => clearTimeout(timeout);
   }, [accountId, name]);
 
+  const shareQrCode = async () => {
+    try {
+      await Share.share({
+        message: `Escanea este código QR para acceder a mi cuenta:\nPAGOCASH:${accountId}:${name}`,
+        url: qrImage || "",
+      });
+    } catch (error) {
+      console.log("Error al compartir:", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Mi código QR</Text>
       <View style={styles.card}>
         {isLoading ? (
           <ActivityIndicator size="large" color="#FFC107" />
         ) : (
           <Image
-            source={{ uri: qrImage || "" }} // Proporciona una cadena vacía si qrImage es null
+            source={{ uri: qrImage || "" }}
             style={styles.qrImage}
             resizeMode="contain"
           />
@@ -36,6 +45,14 @@ const QRCode = ({ accountId, name }: { accountId: string; name: string }) => {
       <View style={styles.accountInfo}>
         <Text style={styles.accountName}>{name}</Text>
         <Text style={styles.accountId}>{accountId}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={shareQrCode}>
+          <Text style={styles.buttonText}>Compartir</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Guardar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -46,7 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#F9F9F9",
   },
   title: {
     fontSize: 24,
@@ -55,14 +71,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   card: {
-    width: 200,
-    height: 200,
+    width: 220,
+    height: 220,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
     backgroundColor: "#FFF",
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -85,6 +100,24 @@ const styles = StyleSheet.create({
   accountId: {
     fontSize: 14,
     color: "#888",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: "#2ECC71",
+    padding: 15,
+    borderRadius: 8,
+    width: "45%",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
