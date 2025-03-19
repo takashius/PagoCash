@@ -62,7 +62,7 @@ export default function HomeScreen() {
           <View style={styles.cardGrid}>
             <TouchableOpacity
               style={styles.card}
-              onPress={() => alert("Función de recarga no implementada")}
+              onPress={() => navigation.navigate("Recharge")}
             >
               <Feather
                 name="credit-card"
@@ -88,7 +88,7 @@ export default function HomeScreen() {
 
             <TouchableOpacity
               style={styles.card}
-              onPress={() => navigation.navigate("Profile", { screen: "QR" })}
+              onPress={() => navigation.navigate("QR")}
             >
               <Feather
                 name="camera"
@@ -101,9 +101,7 @@ export default function HomeScreen() {
 
             <TouchableOpacity
               style={styles.card}
-              onPress={() =>
-                alert("Función de transferencia no implementada")
-              }
+              onPress={() => navigation.navigate("Transfer")}
             >
               <Feather
                 name="arrow-right"

@@ -9,7 +9,9 @@ import Transactions from "../screens/Transactions";
 import Profile from "../screens/Profile";
 import MyQR from "../screens/MyQR";
 import QRScanner from "../components/QRScanner";
+import RechargeScreen from "../screens/Recharge";
 import Login from "../screens/Login";
+import TransferScreen from "../screens/Transfer";
 import { Home, List, User } from "lucide-react-native";
 import { useUser } from "../context/UserContext";
 
@@ -19,81 +21,114 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   const { user } = useUser();
 
-  const ProfileStack = () => (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="QR" component={MyQR} options={{ headerTitle: "Mi código QR" }} />
-    </Stack.Navigator>
-  );
+  const TabsNavigator = () => (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let IconComponent;
 
-  const HomeStack = () => (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="QRScanner" component={QRScanner} />
-    </Stack.Navigator>
+          switch (route.name) {
+            case "Inicio":
+              IconComponent = Home;
+              break;
+            case "Movimientos":
+              IconComponent = List;
+              break;
+            case "Profile":
+              IconComponent = User;
+              break;
+            default:
+              IconComponent = Home;
+          }
+
+          return <IconComponent color={color} size={size} />;
+        },
+        tabBarActiveTintColor: "#007bff",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          backgroundColor: "white",
+          borderTopWidth: 1,
+          borderTopColor: "#f4f4f4",
+          height: 80,
+          paddingTop: 12,
+        },
+        headerStyle: { backgroundColor: "#007bff" },
+        headerTintColor: "white",
+      })}
+    >
+      <Tab.Screen
+        name="Inicio"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Inicio",
+          headerTitle: "Inicio",
+        }} />
+      <Tab.Screen
+        name="Movimientos"
+        component={Transactions}
+        options={{
+          tabBarLabel: "Movimientos",
+          headerTitle: "Movimientos",
+        }} />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: "Perfil",
+          headerTitle: "Mi perfil",
+        }} />
+    </Tab.Navigator>
   );
 
   return (
     <PaperProvider theme={CustomTheme}>
       <NavigationContainer>
         {user ? (
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                let IconComponent;
-
-                switch (route.name) {
-                  case "Inicio":
-                    IconComponent = Home;
-                    break;
-                  case "Movimientos":
-                    IconComponent = List;
-                    break;
-                  case "Profile":
-                    IconComponent = User;
-                    break;
-                  default:
-                    IconComponent = Home;
-                }
-
-                return <IconComponent color={color} size={size} />;
-              },
-              tabBarActiveTintColor: "#2ECC71",
-              tabBarInactiveTintColor: "gray",
-              tabBarStyle: {
-                backgroundColor: "white",
-                borderTopWidth: 1,
-                borderTopColor: "#f4f4f4",
-                height: 80,
-                paddingTop: 12,
-              },
-              headerStyle: { backgroundColor: "#2ECC71" },
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#007bff" },
               headerTintColor: "white",
-            })}
+              headerTitleAlign: "center",
+            }}
           >
-            <Tab.Screen
-              name="Inicio"
-              component={HomeStack}
+            <Stack.Screen
+              name="Tabs"
+              component={TabsNavigator}
               options={{
                 headerShown: false,
-                tabBarLabel: "Inicio",
                 headerTitle: "Inicio",
-              }} />
-            <Tab.Screen
-              name="Movimientos"
-              component={Transactions}
+              }}
+            />
+            <Stack.Screen
+              name="QR"
+              component={MyQR}
               options={{
-                tabBarLabel: "Movimientos",
-                headerTitle: "Movimientos",
-              }} />
-            <Tab.Screen
-              name="Profile"
-              component={ProfileStack}
+                headerTitle: "Mi QR",
+              }}
+            />
+            <Stack.Screen
+              name="QRScanner"
+              component={QRScanner}
               options={{
-                tabBarLabel: "Perfil",
-                headerTitle: "Mi perfil",
-              }} />
-          </Tab.Navigator>
+                headerTitle: "Escanear QR",
+              }}
+            />
+            <Stack.Screen
+              name="Recharge"
+              component={RechargeScreen}
+              options={{
+                headerTitle: "Recargar",
+              }}
+            />
+            <Stack.Screen
+              name="Transfer"
+              component={TransferScreen}
+              options={{
+                headerTitle: "Transferir",
+              }}
+            />
+          </Stack.Navigator>
         ) : (
           <Stack.Navigator>
             <Stack.Screen

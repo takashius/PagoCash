@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     fontSize: 12,
-    color: "#2ECC71",
+    color: "#007bff",
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   button: {
-    backgroundColor: "#2ECC71",
+    backgroundColor: "#007bff",
     borderRadius: 8,
     padding: 15,
     alignItems: "center",
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   registerLink: {
-    color: "#2ECC71",
+    color: "#007bff",
     fontWeight: "bold",
   },
 });
