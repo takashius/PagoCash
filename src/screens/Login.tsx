@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Image,
 } from "react-native";
 import { Checkbox } from "../components/ui/checkbox";
 import { CustomButton } from "../components/ui/custom-button";
@@ -41,6 +42,7 @@ const Login = () => {
     <View style={styles.container}>
       {/* Encabezado */}
       <View style={styles.header}>
+        <Image source={require("../../assets/logo.png")} style={styles.logo} />
         <Text style={styles.title}>Bienvenido de nuevo</Text>
         <Text style={styles.subtitle}>
           Inicia sesión para continuar con Pago Cash
@@ -109,12 +111,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#F9F9F9",
     justifyContent: "center",
   },
   header: {
     marginBottom: 20,
     alignItems: "center",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: "contain",
+    marginBottom: 10,
   },
   title: {
     fontSize: 24,
@@ -179,6 +186,6 @@ const styles = StyleSheet.create({
   },
   registerLink: {
     color: "#007bff",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
 });
