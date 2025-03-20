@@ -27,11 +27,6 @@
       ],
       "package": "com.erickhernandez.PagoCash"
     },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "transparent",
-      "translucent": true
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     },

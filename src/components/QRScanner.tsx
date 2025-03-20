@@ -17,7 +17,7 @@ export default function QRScanner({ navigation }: { navigation: any }) {
       <View style={styles.container}>
         <Text>No tienes acceso a la cámara</Text>
         <TouchableOpacity onPress={requestPermission} style={styles.buttonOld}>
-          <Text style={styles.buttonText}>Intentar de nuevo</Text>
+          <Text style={styles.buttonText}>Solicitar permisos</Text>
         </TouchableOpacity>
       </View>
     );
@@ -90,8 +90,9 @@ const styles = StyleSheet.create({
   },
   buttonOld: {
     marginTop: 20,
-    backgroundColor: "#ff7f50",
+    backgroundColor: "#007bff",
     padding: 15,
+    marginHorizontal: 50,
     borderRadius: 8,
   },
   buttonText: {
