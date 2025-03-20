@@ -27,6 +27,11 @@
       ],
       "package": "com.erickhernandez.PagoCash"
     },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "transparent",
+      "translucent": true
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     },
@@ -49,6 +54,8 @@
       "policy": "appVersion"
     },
     "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/1b7c5502-9b2a-4ba9-a539-0b211dc5894b"
     }
   }
