@@ -5,7 +5,11 @@
     "email": "Email",
     "phone": "Phone",
     "documentId": "Document Id",
-    "logout": "Logout"
+    "logout": "Logout",
+    "amount": "Amount",
+    "date": "Date",
+    "continue": "Continue",
+    "bank": "Bank"
   },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",
@@ -24,5 +28,21 @@
     "scan": "Scan",
     "myQr": "My QR",
     "transfer": "Transfer"
+  },
+  "recharge": {
+    "topUpSuccess": "Top up successful!",
+    "topUpMessage": "You have recharged Bs. {{amount}} to your account.",
+    "method": "Method",
+    "card": "Card",
+    "bankTransfer": "Bank transfer",
+    "topUpBalance": "Top up balance",
+    "currentBalance": "Current balance",
+    "topUpAmount": "Top up amount",
+    "paymentMethod": "Payment method",
+    "cardNumber": "Card number",
+    "expirationDate": "Expiration date (MM/YY)",
+    "selectBank": "Select a bank",
+    "referenceNumber": "Reference number",
+    "enterReferenceNumber": "Enter the reference number"
   }
 }

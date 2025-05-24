@@ -11,8 +11,10 @@ import { Button, Snackbar } from "react-native-paper";
 import { Check, CreditCard, Building } from "lucide-react-native";
 import generalStyles from "../styles/global";
 import rechargeStyles from "../styles/recharge";
+import { useTranslation } from "react-i18next";
 
 const RechargeScreen: React.FC = () => {
+  const { t } = useTranslation();
   const [currentBalance, setCurrentBalance] = useState<number>(1000.0);
   const [amount, setAmount] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<"card" | "bank" | "">("");
@@ -99,24 +101,24 @@ const RechargeScreen: React.FC = () => {
           <View style={rechargeStyles.successIcon}>
             <Check size={32} color="#007bff" />
           </View>
-          <Text style={rechargeStyles.successTitle}>¡Recarga exitosa!</Text>
+          <Text style={rechargeStyles.successTitle}>{t('recharge.topUpSuccess')}</Text>
           <Text style={rechargeStyles.successMessage}>
-            Has recargado Bs. {parseFloat(amount).toFixed(2)} a tu cuenta.
+            {t("topUpMessage", { amount: parseFloat(amount).toFixed(2) })}
           </Text>
 
           <View style={rechargeStyles.detailsCard}>
             <Text style={rechargeStyles.detailsRow}>
-              <Text style={rechargeStyles.detailsLabel}>Monto: </Text>
+              <Text style={rechargeStyles.detailsLabel}>{t('general.amount')}: </Text>
               <Text>Bs. {parseFloat(amount).toFixed(2)}</Text>
             </Text>
             <Text style={rechargeStyles.detailsRow}>
-              <Text style={rechargeStyles.detailsLabel}>Método: </Text>
+              <Text style={rechargeStyles.detailsLabel}>{t('recharge.method')}: </Text>
               <Text>
-                {paymentMethod === "card" ? "Tarjeta" : "Transferencia bancaria"}
+                {paymentMethod === "card" ? t('recharge.card') : t('recharge.bankTransfer')}
               </Text>
             </Text>
             <Text style={rechargeStyles.detailsRow}>
-              <Text style={rechargeStyles.detailsLabel}>Fecha: </Text>
+              <Text style={rechargeStyles.detailsLabel}>{t('date')}: </Text>
               <Text>{new Date().toLocaleDateString()}</Text>
             </Text>
           </View>
@@ -127,7 +129,7 @@ const RechargeScreen: React.FC = () => {
             style={rechargeStyles.primaryButton}
             labelStyle={rechargeStyles.primaryButtonText}
           >
-            Continuar
+            {t('general.continue')}
           </Button>
         </View>
       </View>
@@ -136,13 +138,13 @@ const RechargeScreen: React.FC = () => {
 
   return (
     <ScrollView style={generalStyles.containerTop}>
-      <Text style={[generalStyles.title, { marginBottom: 20 }]}>Recargar Saldo</Text>
+      <Text style={[generalStyles.title, { marginBottom: 20 }]}>{t('recharge.topUpBalance')}</Text>
       <Text style={rechargeStyles.label}>
-        Saldo actual: <Text style={rechargeStyles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
+        {t('recharge.currentBalance')}: <Text style={rechargeStyles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
       </Text>
 
       <View style={rechargeStyles.inputGroup}>
-        <Text style={rechargeStyles.label}>Monto a recargar</Text>
+        <Text style={rechargeStyles.label}>{t('recharge.topUpAmount')}</Text>
         <View style={rechargeStyles.inputWrapper}>
           <Text style={rechargeStyles.inputPrefix}>Bs.</Text>
           <TextInput
@@ -155,7 +157,7 @@ const RechargeScreen: React.FC = () => {
         </View>
       </View>
 
-      <Text style={rechargeStyles.label}>Método de pago</Text>
+      <Text style={rechargeStyles.label}>{t('recharge.paymentMethod')}</Text>
       <View style={rechargeStyles.paymentMethods}>
         <TouchableOpacity
           style={[
@@ -165,7 +167,7 @@ const RechargeScreen: React.FC = () => {
           onPress={() => setPaymentMethod("card")}
         >
           <CreditCard size={24} color="#555" />
-          <Text style={rechargeStyles.paymentText}>Tarjeta</Text>
+          <Text style={rechargeStyles.paymentText}>{t('recharge.card')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -175,13 +177,13 @@ const RechargeScreen: React.FC = () => {
           onPress={() => setPaymentMethod("bank")}
         >
           <Building size={24} color="#555" />
-          <Text style={rechargeStyles.paymentText}>Banco</Text>
+          <Text style={rechargeStyles.paymentText}>{t('general.bank')}</Text>
         </TouchableOpacity>
       </View>
 
       {paymentMethod === "card" && (
         <View>
-          <Text style={rechargeStyles.label}>Número de tarjeta</Text>
+          <Text style={rechargeStyles.label}>{t('recharge.cardNumber')}</Text>
           <TextInput
             style={generalStyles.input}
             value={cardNumber}
@@ -189,7 +191,7 @@ const RechargeScreen: React.FC = () => {
             placeholder="0000 0000 0000 0000"
             keyboardType="numeric"
           />
-          <Text style={rechargeStyles.label}>Fecha de expiración (MM/YY)</Text>
+          <Text style={rechargeStyles.label}>{t('recharge.expirationDate')}</Text>
           <TextInput
             style={generalStyles.input}
             value={expiryDate}
@@ -209,19 +211,19 @@ const RechargeScreen: React.FC = () => {
 
       {paymentMethod === "bank" && (
         <View>
-          <Text style={rechargeStyles.label}>Banco</Text>
+          <Text style={rechargeStyles.label}>{t('general.bank')}</Text>
           <TextInput
             style={generalStyles.input}
             value={bankName}
             onChangeText={setBankName}
-            placeholder="Selecciona un banco"
+            placeholder={t('recharge.selectBank')}
           />
-          <Text style={rechargeStyles.label}>Número de referencia</Text>
+          <Text style={rechargeStyles.label}>{t('recharge.referenceNumber')}</Text>
           <TextInput
             style={generalStyles.input}
             value={referenceNumber}
             onChangeText={setReferenceNumber}
-            placeholder="Ingresa el número de referencia"
+            placeholder={t('recharge.enterReferenceNumber')}
           />
         </View>
       )}
@@ -234,7 +236,7 @@ const RechargeScreen: React.FC = () => {
         style={rechargeStyles.primaryButton}
         labelStyle={rechargeStyles.primaryButtonText}
       >
-        Recargar
+        {t('general.recharge')}
       </Button>
 
 

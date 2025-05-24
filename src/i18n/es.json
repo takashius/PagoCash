@@ -5,7 +5,11 @@
     "email": "Correo",
     "phone": "Teléfono",
     "documentId": "Cédula",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "amount": "Monto",
+    "date": "Fecha",
+    "continue": "Continuar",
+    "bank": "Banco"
   },
   "login": {
     "login_to_continue": "Inicia sesión para continuar con Pago Cash",
@@ -24,5 +28,21 @@
     "scan": "Escanear",
     "myQr": "Mi QR",
     "transfer": "Transferir"
+  },
+  "recharge": {
+    "topUpSuccess": "¡Recarga exitosa!",
+    "topUpMessage": "Has recargado Bs. {{amount}} a tu cuenta.",
+    "method": "Método",
+    "card": "Tarjeta",
+    "bankTransfer": "Transferencia bancaria",
+    "topUpBalance": "Recargar Saldo",
+    "currentBalance": "Saldo actual",
+    "topUpAmount": "Monto a recargar",
+    "paymentMethod": "Método de pago",
+    "cardNumber": "Número de tarjeta",
+    "expirationDate": "Fecha de expiración (MM/YY)",
+    "selectBank": "Selecciona un banco",
+    "referenceNumber": "Número de referencia",
+    "enterReferenceNumber": "Ingresa el número de referencia"
   }
 }
