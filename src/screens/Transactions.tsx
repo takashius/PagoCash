@@ -1,6 +1,7 @@
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import TransactionList from '../components/TransactionList';
+import generalStyles from '../styles/global';
 
 interface Transaction {
   id: string;
@@ -43,20 +44,8 @@ export default function Transactions() {
   ];
 
   return (
-    <View style={styles.scrollContainer}>
+    <View style={generalStyles.container}>
       <TransactionList transactions={mockTransactions as Transaction[]} />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  scrollContainer: {
-    flex: 1,
-    padding: 16
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginVertical: 10,
-  },
-})

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Feather } from "@expo/vector-icons";
 import TransactionList from '../components/TransactionList';
 import { useNavigation } from '@react-navigation/native';
+import generalStyles from '../styles/global';
+import homeStyles from '../styles/home';
 
 interface Transaction {
   id: string;
@@ -48,72 +50,72 @@ export default function HomeScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.scrollContainer}>
-        <View style={styles.dashboard}>
-          <Text style={styles.balanceLabel}>Mi saldo</Text>
-          <Text style={styles.balance}>
+    <SafeAreaView style={generalStyles.container}>
+      <View style={generalStyles.scrollContainer}>
+        <View style={homeStyles.dashboard}>
+          <Text style={homeStyles.balanceLabel}>Mi saldo</Text>
+          <Text style={homeStyles.balance}>
             Bs. {balance.toFixed(2)}
           </Text>
-          <Text style={styles.accountNumber}>
+          <Text style={homeStyles.accountNumber}>
             Número de cuenta: PC-123456
           </Text>
 
-          <View style={styles.cardGrid}>
+          <View style={generalStyles.cardGrid}>
             <TouchableOpacity
-              style={styles.card}
+              style={generalStyles.card}
               onPress={() => navigation.navigate("Recharge")}
             >
               <Feather
                 name="credit-card"
                 size={24}
                 color="#333"
-                style={styles.cardIcon}
+                style={generalStyles.cardIcon}
               />
-              <Text style={styles.cardText}>Recargar</Text>
+              <Text style={generalStyles.cardText}>Recargar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.card}
+              style={generalStyles.card}
               onPress={() => navigation.navigate("QRScanner")}
             >
               <Feather
                 name="search"
                 size={24}
                 color="#333"
-                style={styles.cardIcon}
+                style={generalStyles.cardIcon}
               />
-              <Text style={styles.cardText}>Escanear</Text>
+              <Text style={generalStyles.cardText}>Escanear</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.card}
+              style={generalStyles.card}
               onPress={() => navigation.navigate("QR")}
             >
               <Feather
                 name="camera"
                 size={24}
                 color="#333"
-                style={styles.cardIcon}
+                style={generalStyles.cardIcon}
               />
-              <Text style={styles.cardText}>Mi QR</Text>
+              <Text style={generalStyles.cardText}>Mi QR</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.card}
+              style={generalStyles.card}
               onPress={() => navigation.navigate("Transfer")}
             >
               <Feather
                 name="arrow-right"
                 size={24}
                 color="#333"
-                style={styles.cardIcon}
+                style={generalStyles.cardIcon}
               />
-              <Text style={styles.cardText}>Transferir</Text>
+              <Text style={generalStyles.cardText}>Transferir</Text>
             </TouchableOpacity>
           </View>
 
-          <View style={styles.scrollContainer}>
+          <View style={generalStyles.scrollContainer}>
             <TransactionList transactions={mockTransactions.slice(0, 3) as Transaction[]} />
           </View>
         </View>
@@ -121,58 +123,3 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-  dashboard: {
-    flex: 1,
-    padding: 20,
-    paddingBottom: 0
-  },
-  balanceLabel: {
-    textAlign: "center",
-    color: "#555",
-  },
-  balance: {
-    textAlign: "center",
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  accountNumber: {
-    textAlign: "center",
-    color: "#777",
-  },
-  cardGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginVertical: 20,
-  },
-  card: {
-    width: "48%",
-    padding: 20,
-    backgroundColor: "#FFF",
-    borderRadius: 8,
-    alignItems: "center",
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  cardIcon: {
-    marginBottom: 10,
-  },
-  cardText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#333",
-  },
-});

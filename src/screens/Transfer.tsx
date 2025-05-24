@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   ScrollView,
@@ -11,6 +10,8 @@ import {
 import { Button, Snackbar, Card } from "react-native-paper";
 import { Send, Search, User, MessageSquare } from "lucide-react-native";
 import ContactSelector from "../components/ui/contact-selector";
+import generalStyles from "../styles/global";
+import transferStyles from "../styles/transfer";
 
 interface Contact {
   id: string;
@@ -81,13 +82,13 @@ const TransferScreen: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Monto a transferir</Text>
-        <View style={styles.inputWrapper}>
-          <Text style={styles.inputPrefix}>Bs.</Text>
+    <ScrollView style={generalStyles.containerTop}>
+      <View style={transferStyles.inputGroup}>
+        <Text style={transferStyles.label}>Monto a transferir</Text>
+        <View style={transferStyles.inputWrapper}>
+          <Text style={transferStyles.inputPrefix}>Bs.</Text>
           <TextInput
-            style={styles.input}
+            style={generalStyles.input}
             value={amount}
             onChangeText={setAmount}
             placeholder="0.00"
@@ -95,18 +96,18 @@ const TransferScreen: React.FC = () => {
             textAlign="right"
           />
         </View>
-        <Text style={styles.balanceInfo}>
-          Saldo disponible: <Text style={styles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
+        <Text style={transferStyles.balanceInfo}>
+          Saldo disponible: <Text style={transferStyles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
         </Text>
       </View>
 
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Método de transferencia</Text>
-        <View style={styles.paymentMethods}>
+      <View style={transferStyles.inputGroup}>
+        <Text style={transferStyles.label}>Método de transferencia</Text>
+        <View style={transferStyles.paymentMethods}>
           <TouchableOpacity
             style={[
-              styles.paymentMethod,
-              transferMethod === "contact" && styles.selectedMethod,
+              transferStyles.paymentMethod,
+              transferMethod === "contact" && transferStyles.selectedMethod,
             ]}
             onPress={() => {
               setTransferMethod("contact");
@@ -115,12 +116,12 @@ const TransferScreen: React.FC = () => {
             }}
           >
             <User size={24} color="#333" />
-            <Text style={styles.methodText}>Contacto</Text>
+            <Text style={transferStyles.methodText}>Contacto</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
-              styles.paymentMethod,
-              transferMethod === "account" && styles.selectedMethod,
+              transferStyles.paymentMethod,
+              transferMethod === "account" && transferStyles.selectedMethod,
             ]}
             onPress={() => {
               setTransferMethod("account");
@@ -128,20 +129,20 @@ const TransferScreen: React.FC = () => {
             }}
           >
             <Search size={24} color="#333" />
-            <Text style={styles.methodText}>Número de cuenta</Text>
+            <Text style={transferStyles.methodText}>Número de cuenta</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {transferMethod === "contact" ? (
-        <View style={styles.inputGroup}>
+        <View style={transferStyles.inputGroup}>
           <ContactSelector contacts={mockContacts} onSelect={handleSelectContact} />
         </View>
       ) : (
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Número de cuenta</Text>
+        <View style={transferStyles.inputGroup}>
+          <Text style={transferStyles.label}>Número de cuenta</Text>
           <TextInput
-            style={styles.input}
+            style={generalStyles.input}
             value={recipient}
             onChangeText={setRecipient}
             placeholder="PC-123456"
@@ -149,13 +150,13 @@ const TransferScreen: React.FC = () => {
         </View>
       )}
 
-      <View style={styles.inputGroup}>
+      <View style={transferStyles.inputGroup}>
         <View style={{ flexDirection: "row" }}>
           <MessageSquare size={24} color="#333" />
-          <Text style={[styles.label, { marginLeft: 8 }]}>Mensaje (opcional)</Text>
+          <Text style={[transferStyles.label, { marginLeft: 8 }]}>Mensaje (opcional)</Text>
         </View>
         <TextInput
-          style={styles.input}
+          style={generalStyles.input}
           value={message}
           onChangeText={setMessage}
           placeholder="Escribe un mensaje para el destinatario"
@@ -163,20 +164,20 @@ const TransferScreen: React.FC = () => {
       </View>
 
       {amount && recipient && (
-        <Card style={styles.summaryCard}>
+        <Card style={transferStyles.summaryCard}>
           <Card.Content>
-            <Text style={styles.summaryTitle}>Resumen de transferencia</Text>
-            <Text style={styles.summaryText}>
-              <Text style={styles.summaryLabel}>Monto: </Text>
+            <Text style={transferStyles.summaryTitle}>Resumen de transferencia</Text>
+            <Text style={transferStyles.summaryText}>
+              <Text style={transferStyles.summaryLabel}>Monto: </Text>
               Bs. {parseFloat(amount).toFixed(2)}
             </Text>
-            <Text style={styles.summaryText}>
-              <Text style={styles.summaryLabel}>Destinatario: </Text>
+            <Text style={transferStyles.summaryText}>
+              <Text style={transferStyles.summaryLabel}>Destinatario: </Text>
               {recipient}
             </Text>
             {message ? (
-              <Text style={styles.summaryText}>
-                <Text style={styles.summaryLabel}>Mensaje: </Text>
+              <Text style={transferStyles.summaryText}>
+                <Text style={transferStyles.summaryLabel}>Mensaje: </Text>
                 {message}
               </Text>
             ) : null}
@@ -186,13 +187,13 @@ const TransferScreen: React.FC = () => {
       <Button
         mode="contained"
         onPress={handleSubmit}
-        style={styles.primaryButton}
-        contentStyle={styles.buttonContent} // Estilo para la disposición
+        style={transferStyles.primaryButton}
+        contentStyle={transferStyles.buttonContent} // Estilo para la disposición
         disabled={!amount || !recipient}
       >
-        <View style={styles.iconAndTextWrapper}>
-          <Text style={styles.primaryButtonText}>Confirmar transferencia</Text>
-          <Send size={20} color="#fff" style={styles.iconStyle} />
+        <View style={transferStyles.iconAndTextWrapper}>
+          <Text style={transferStyles.primaryButtonText}>Confirmar transferencia</Text>
+          <Send size={20} color="#fff" style={transferStyles.iconStyle} />
         </View>
       </Button>
 
@@ -206,145 +207,5 @@ const TransferScreen: React.FC = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  inputGroup: {
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "500",
-    marginBottom: 5,
-    color: "#555",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
-    fontSize: 16,
-    backgroundColor: "#f9f9f9",
-    width: "100%",
-    textAlign: "right",
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  inputPrefix: {
-    position: "absolute",
-    left: 10,
-    fontSize: 16,
-    color: "#555",
-  },
-  balanceInfo: {
-    fontSize: 14,
-    color: "#777",
-    marginTop: 5,
-  },
-  balance: {
-    fontWeight: "bold",
-    color: "#007bff",
-  },
-  paymentMethods: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-  paymentMethod: {
-    flex: 1,
-    padding: 15,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderRadius: 8,
-    marginHorizontal: 5,
-    borderColor: "#ccc",
-    backgroundColor: "#fff",
-  },
-  selectedMethod: {
-    borderColor: "#007bff",
-    backgroundColor: "#E9F7EF",
-  },
-  methodText: {
-    fontSize: 14,
-    fontWeight: "500",
-    marginTop: 8,
-    color: "#555",
-  },
-  contactItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  contactDetails: {
-    marginLeft: 10,
-  },
-  contactName: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  contactAccount: {
-    fontSize: 14,
-    color: "#777",
-  },
-  summaryCard: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: "#F9F9F9",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-  summaryTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#333",
-  },
-  summaryText: {
-    fontSize: 14,
-    marginBottom: 5,
-    color: "#555",
-  },
-  summaryLabel: {
-    fontWeight: "bold",
-    color: "#333",
-  },
-  primaryButton: {
-    marginTop: 20,
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 8,
-  },
-  primaryButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-    marginLeft: 8,
-  },
-  buttonContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  iconAndTextWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  iconStyle: {
-    marginLeft: 8,
-  },
-});
 
 export default TransferScreen;
