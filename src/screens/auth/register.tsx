@@ -5,6 +5,7 @@ import { TextInput, Button } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import generalStyles from "../../styles/global";
 import registerStyles from "../../styles/register";
+import { useNavigation } from "@react-navigation/native";
 
 interface RegisterFormData {
   name: string;
@@ -17,6 +18,7 @@ interface RegisterFormData {
 
 const Register: React.FC = () => {
   const { t } = useTranslation();
+  const navigation: any = useNavigation();
   const { control, handleSubmit, watch } = useForm<RegisterFormData>({
     defaultValues: {
       name: "",
@@ -180,7 +182,7 @@ const Register: React.FC = () => {
         {/* Volver al login */}
         <Text style={registerStyles.registerPrompt}>
           {t("register.haveAccount")}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <Text style={[registerStyles.registerLink, { marginLeft: 8 }]}>{t("register.loginLink")}</Text>
           </TouchableOpacity>
         </Text>

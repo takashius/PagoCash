@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, Checkbox, Button } from "react-native-paper";
 import { useUser } from "../../context/UserContext";
@@ -52,16 +52,16 @@ const Login: React.FC = () => {
         <Text style={loginStyles.subtitle}>{t("login.login_to_continue")}</Text>
       </View>
 
-      {/* Formulario */}
-      <View style={loginStyles.form}>
+      {/* Formulario con Scroll */}
+      <ScrollView style={loginStyles.form} showsVerticalScrollIndicator={false}>
         {/* Usuario o Correo */}
         <View style={loginStyles.formGroup}>
-          <Text style={loginStyles.label}>{t("login.userOrEmail")}</Text>
           <Controller
             name="username"
             control={control}
             render={({ field }) => (
               <TextInput
+                label={t("login.userOrEmail")}
                 placeholder={t("login.usernamePlaceholder")}
                 value={field.value}
                 onChangeText={field.onChange}
@@ -71,50 +71,52 @@ const Login: React.FC = () => {
           />
         </View>
 
-        {/* Contraseña con opción de visibilidad */}
+        {/* Contraseña */}
         <View style={loginStyles.formGroup}>
-          <View style={loginStyles.passwordHeader}>
-            <Text style={loginStyles.label}>{t("login.passwordLabel")}</Text>
-            <TouchableOpacity>
-              <Text style={loginStyles.forgotPassword}>{t("login.forgotPassword")}</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={loginStyles.passwordContainer}>
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <TextInput
-                  placeholder={t("login.passwordPlaceholder")}
-                  secureTextEntry={!isPasswordVisible}
-                  value={field.value}
-                  onChangeText={field.onChange}
-                  style={loginStyles.passwordInput}
-                  right={
-                    <TextInput.Icon
-                      icon={isPasswordVisible ? "eye-off" : "eye"}
-                      onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                    />
-                  }
-                />
-              )}
-            />
-          </View>
-        </View>
-
-        {/* Recordarme */}
-        <View style={loginStyles.checkboxContainer}>
           <Controller
-            name="rememberMe"
+            name="password"
             control={control}
             render={({ field }) => (
-              <Checkbox
-                status={field.value ? "checked" : "unchecked"}
-                onPress={() => setValue("rememberMe", !field.value)}
+              <TextInput
+                label={t("login.passwordLabel")}
+                placeholder={t("login.passwordPlaceholder")}
+                secureTextEntry={!isPasswordVisible}
+                value={field.value}
+                onChangeText={field.onChange}
+                style={loginStyles.passwordInput}
+                right={
+                  <TextInput.Icon
+                    icon={isPasswordVisible ? "eye-off" : "eye"}
+                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  />
+                }
               />
             )}
           />
-          <Text style={loginStyles.checkboxLabel}>{t("login.rememberMe")}</Text>
+        </View>
+
+        {/* Recordarme y Forgot Password en la misma estructura */}
+        <View style={loginStyles.optionsContainer}>
+          {/* Checkbox Recordarme */}
+          <View style={loginStyles.checkboxContainer}>
+            <Controller
+              name="rememberMe"
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  status={field.value ? "checked" : "unchecked"}
+                  onPress={() => setValue("rememberMe", !field.value)}
+                  color="#007BFF"
+                />
+              )}
+            />
+            <Text style={loginStyles.checkboxLabel}>{t("login.rememberMe")}</Text>
+          </View>
+
+          {/* Forgot Password alineado a la derecha */}
+          <TouchableOpacity onPress={() => alert("Función de recuperación no implementada")}>
+            <Text style={loginStyles.forgotPassword}>{t("login.forgotPassword")}</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Botón de inicio de sesión */}
@@ -125,13 +127,11 @@ const Login: React.FC = () => {
         {/* Alternar a registro */}
         <Text style={loginStyles.registerPrompt}>
           {t("login.noAccount")}
-          <TouchableOpacity onPress={() => {
-            navigation.navigate("Register");
-          }}>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text style={[loginStyles.registerLink, { marginLeft: 8 }]}>{t("login.signUp")}</Text>
           </TouchableOpacity>
         </Text>
-      </View>
+      </ScrollView>
     </View>
   );
 };

@@ -32,6 +32,7 @@ const loginStyles = StyleSheet.create({
   forgotPassword: {
     fontSize: 12,
     color: "#007bff",
+    marginBottom: 18,
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -67,6 +68,16 @@ const loginStyles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     backgroundColor: "transparent",
+  },
+  passwordFooter: {
+    alignItems: "flex-end",
+    marginTop: 5,
+  },
+  optionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
   },
 });
 
