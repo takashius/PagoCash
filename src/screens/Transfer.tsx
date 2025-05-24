@@ -20,7 +20,7 @@ interface Contact {
 }
 
 const TransferScreen: React.FC = () => {
-  const [currentBalance, setCurrentBalance] = useState<number>(1000.0); // Saldo ficticio
+  const [currentBalance, setCurrentBalance] = useState<number>(1000.0);
   const [amount, setAmount] = useState<string>("");
   const [recipient, setRecipient] = useState<string>("");
   const [selectedContact, setSelectedContact] = useState<string>("");
