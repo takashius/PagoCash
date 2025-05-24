@@ -23,6 +23,15 @@
     "loginButton": "Log in",
     "noAccount": "Don't have an account?"
   },
+  "menu": {
+    "home": "Home",
+    "recharge": "Recharge",
+    "transfer": "Transfer",
+    "transactions": "Transactions",
+    "profile": "Profile",
+    "myProfile": "My profile",
+    "scanQr": "Scan QR"
+  },
   "home": {
     "balance": "My balance",
     "accountNumber": "Account number: {{accountId}}",

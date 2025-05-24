@@ -23,6 +23,15 @@
     "loginButton": "Iniciar Sesión",
     "noAccount": "¿No tienes una cuenta?"
   },
+  "menu": {
+    "home": "Inicio",
+    "recharge": "Recargar",
+    "transfer": "Transferir",
+    "transactions": "Movimientos",
+    "profile": "Perfil",
+    "myProfile": "Mi Perfil",
+    "scanQr": "Escanear QR"
+  },
   "home": {
     "balance": "Mi saldo",
     "accountNumber": "Número de cuenta: {{accountId}}",

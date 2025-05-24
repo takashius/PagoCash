@@ -14,11 +14,13 @@ import Login from "../screens/Login";
 import TransferScreen from "../screens/Transfer";
 import { Home, List, User } from "lucide-react-native";
 import { useUser } from "../context/UserContext";
+import { useTranslation } from "react-i18next";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+  const { t } = useTranslation();
   const { user } = useUser();
 
   const TabsNavigator = () => (
@@ -28,10 +30,10 @@ const AppNavigator = () => {
           let IconComponent;
 
           switch (route.name) {
-            case "Inicio":
+            case "Home":
               IconComponent = Home;
               break;
-            case "Movimientos":
+            case "Transactions":
               IconComponent = List;
               break;
             case "Profile":
@@ -57,26 +59,26 @@ const AppNavigator = () => {
       })}
     >
       <Tab.Screen
-        name="Inicio"
+        name="Home"
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: "Inicio",
-          headerTitle: "Inicio",
+          tabBarLabel: t('menu.home'),
+          headerTitle: t('menu.home'),
         }} />
       <Tab.Screen
-        name="Movimientos"
+        name="Transactions"
         component={Transactions}
         options={{
-          tabBarLabel: "Movimientos",
-          headerTitle: "Movimientos",
+          tabBarLabel: t('menu.transactions'),
+          headerTitle: t('menu.transactions'),
         }} />
       <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: "Perfil",
-          headerTitle: "Mi perfil",
+          tabBarLabel: t('menu.profile'),
+          headerTitle: t('menu.myProfile'),
         }} />
     </Tab.Navigator>
   );
@@ -97,35 +99,35 @@ const AppNavigator = () => {
               component={TabsNavigator}
               options={{
                 headerShown: false,
-                headerTitle: "Inicio",
+                headerTitle: t('menu.home'),
               }}
             />
             <Stack.Screen
               name="QR"
               component={MyQR}
               options={{
-                headerTitle: "Mi QR",
+                headerTitle: t('home.myQr'),
               }}
             />
             <Stack.Screen
               name="QRScanner"
               component={QRScanner}
               options={{
-                headerTitle: "Escanear QR",
+                headerTitle: t('menu.scanQr'),
               }}
             />
             <Stack.Screen
               name="Recharge"
               component={RechargeScreen}
               options={{
-                headerTitle: "Recargar",
+                headerTitle: t('menu.recharge'),
               }}
             />
             <Stack.Screen
               name="Transfer"
               component={TransferScreen}
               options={{
-                headerTitle: "Transferir",
+                headerTitle: t('menu.transfer'),
               }}
             />
           </Stack.Navigator>
