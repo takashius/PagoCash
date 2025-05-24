@@ -5,6 +5,7 @@ import TransactionList from '../components/TransactionList';
 import { useNavigation } from '@react-navigation/native';
 import generalStyles from '../styles/global';
 import homeStyles from '../styles/home';
+import { useTranslation } from 'react-i18next';
 
 interface Transaction {
   id: string;
@@ -15,8 +16,10 @@ interface Transaction {
 }
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
   const [balance, setBalance] = useState(1250.75);
   const navigation: any = useNavigation();
+  const accountId = "PC-123456";
 
   const mockTransactions = [
     {
@@ -53,12 +56,12 @@ export default function HomeScreen() {
     <SafeAreaView style={generalStyles.container}>
       <View style={generalStyles.scrollContainer}>
         <View style={homeStyles.dashboard}>
-          <Text style={homeStyles.balanceLabel}>Mi saldo</Text>
+          <Text style={homeStyles.balanceLabel}>{t('home.balance')}</Text>
           <Text style={homeStyles.balance}>
             Bs. {balance.toFixed(2)}
           </Text>
           <Text style={homeStyles.accountNumber}>
-            Número de cuenta: PC-123456
+            {t("home.accountNumber", { accountId })}
           </Text>
 
           <View style={generalStyles.cardGrid}>
@@ -72,7 +75,7 @@ export default function HomeScreen() {
                 color="#333"
                 style={generalStyles.cardIcon}
               />
-              <Text style={generalStyles.cardText}>Recargar</Text>
+              <Text style={generalStyles.cardText}>{t('home.recharge')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -85,7 +88,7 @@ export default function HomeScreen() {
                 color="#333"
                 style={generalStyles.cardIcon}
               />
-              <Text style={generalStyles.cardText}>Escanear</Text>
+              <Text style={generalStyles.cardText}>{t('home.scan')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -98,7 +101,7 @@ export default function HomeScreen() {
                 color="#333"
                 style={generalStyles.cardIcon}
               />
-              <Text style={generalStyles.cardText}>Mi QR</Text>
+              <Text style={generalStyles.cardText}>{t('home.myQr')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -111,7 +114,7 @@ export default function HomeScreen() {
                 color="#333"
                 style={generalStyles.cardIcon}
               />
-              <Text style={generalStyles.cardText}>Transferir</Text>
+              <Text style={generalStyles.cardText}>{t('home.transfer')}</Text>
             </TouchableOpacity>
           </View>
 

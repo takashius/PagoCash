@@ -1,6 +1,7 @@
 {
   "general": {
-    "welcome": "Welcome back"
+    "welcome": "Welcome to Pago Cash",
+    "recharge": "Recharge"
   },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",
@@ -12,5 +13,12 @@
     "userOrEmail": "User or Email",
     "loginButton": "Log in",
     "noAccount": "Don't have an account?"
+  },
+  "home": {
+    "balance": "My balance",
+    "accountNumber": "Account number: {{accountId}}",
+    "scan": "Scan",
+    "myQr": "My QR",
+    "transfer": "Transfer"
   }
 }

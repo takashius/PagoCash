@@ -1,6 +1,7 @@
 {
   "general": {
-    "welcome": "Bienvenido de nuevo"
+    "welcome": "Bienvenido a Pago Cash",
+    "recharge": "Recargar"
   },
   "login": {
     "login_to_continue": "Inicia sesión para continuar con Pago Cash",
@@ -12,5 +13,12 @@
     "userOrEmail": "Usuario o Correo",
     "loginButton": "Iniciar Sesión",
     "noAccount": "¿No tienes una cuenta?"
+  },
+  "home": {
+    "balance": "Mi saldo",
+    "accountNumber": "Número de cuenta: {{accountId}}",
+    "scan": "Escanear",
+    "myQr": "Mi QR",
+    "transfer": "Transferir"
   }
 }
