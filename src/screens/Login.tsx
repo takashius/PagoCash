@@ -12,8 +12,10 @@ import { CustomButton } from "../components/ui/custom-button";
 import { useUser } from "../context/UserContext";
 import generalStyles from "../styles/global";
 import loginStyles from "../styles/login";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const { login } = useUser();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -44,9 +46,9 @@ const Login = () => {
       {/* Encabezado */}
       <View style={generalStyles.header}>
         <Image source={require("../../assets/logo.png")} style={loginStyles.logo} />
-        <Text style={generalStyles.title}>Bienvenido de nuevo</Text>
+        <Text style={generalStyles.title}>{t('general.welcome')}</Text>
         <Text style={loginStyles.subtitle}>
-          Inicia sesión para continuar con Pago Cash
+          {t('login.login_to_continue')}
         </Text>
       </View>
 
@@ -54,10 +56,10 @@ const Login = () => {
       <View style={loginStyles.form}>
         {/* Usuario o Correo */}
         <View style={loginStyles.formGroup}>
-          <Text style={loginStyles.label}>Usuario o Correo</Text>
+          <Text style={loginStyles.label}>{t('login.userOrEmail')}</Text>
           <TextInput
             style={generalStyles.input}
-            placeholder="Ingresa tu usuario o correo"
+            placeholder={t('login.usernamePlaceholder')}
             value={username}
             onChangeText={setUsername}
           />
@@ -66,14 +68,14 @@ const Login = () => {
         {/* Contraseña */}
         <View style={loginStyles.formGroup}>
           <View style={loginStyles.passwordHeader}>
-            <Text style={loginStyles.label}>Contraseña</Text>
+            <Text style={loginStyles.label}>{t('login.passwordLabel')}</Text>
             <TouchableOpacity>
-              <Text style={loginStyles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
+              <Text style={loginStyles.forgotPassword}>{t('login.forgotPassword')}</Text>
             </TouchableOpacity>
           </View>
           <TextInput
             style={generalStyles.input}
-            placeholder="Ingresa tu contraseña"
+            placeholder={t('login.passwordPlaceholder')}
             secureTextEntry
             value={password}
             onChangeText={setPassword}
@@ -86,19 +88,19 @@ const Login = () => {
             checked={rememberMe}
             onValueChange={setRememberMe}
           />
-          <Text style={loginStyles.checkboxLabel}>Recordarme</Text>
+          <Text style={loginStyles.checkboxLabel}>{t('login.rememberMe')}</Text>
         </View>
 
         {/* Botón de inicio de sesión */}
         <CustomButton onPress={handleLogin} loading={isLoading}>
-          Iniciar Sesión
+          {t('login.loginButton')}
         </CustomButton>
 
         {/* Alternar a registro */}
         <Text style={loginStyles.registerPrompt}>
-          ¿No tienes una cuenta?{" "}
+          {t('login.noAccount')}
           <TouchableOpacity>
-            <Text style={loginStyles.registerLink}>Regístrate</Text>
+            <Text style={[loginStyles.registerLink, { marginLeft: 8 }]}>Regístrate</Text>
           </TouchableOpacity>
         </Text>
       </View>

@@ -1,0 +1,16 @@
+{
+  "general": {
+    "welcome": "Welcome back"
+  },
+  "login": {
+    "login_to_continue": "Log in to continue with Pago Cash",
+    "usernamePlaceholder": "Enter your username",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot your password?",
+    "rememberMe": "Remember me",
+    "userOrEmail": "User or Email",
+    "loginButton": "Log in",
+    "noAccount": "Don't have an account?"
+  }
+}

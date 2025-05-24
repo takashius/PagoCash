@@ -1,0 +1,16 @@
+{
+  "general": {
+    "welcome": "Bienvenido de nuevo"
+  },
+  "login": {
+    "login_to_continue": "Inicia sesión para continuar con Pago Cash",
+    "usernamePlaceholder": "Ingresa tu nombre de usuario",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "rememberMe": "Recordarme",
+    "userOrEmail": "Usuario o Correo",
+    "loginButton": "Iniciar Sesión",
+    "noAccount": "¿No tienes una cuenta?"
+  }
+}

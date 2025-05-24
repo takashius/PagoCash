@@ -1,20 +1,21 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import esTranslations from "./es.json";
+import enTranslations from "./en.json";
 
 i18n.use(initReactI18next).init({
   lng: "es",
-  fallbackLng: "es",
+  fallbackLng: "en",
   resources: {
-    es: {
-      translation: {
-        welcome: "Bienvenido a erCotizadorMobile",
-      },
-    },
     en: {
-      translation: {
-        welcome: "Welcome to erCotizadorMobile",
-      },
+      translation: enTranslations,
     },
+    es: {
+      translation: esTranslations,
+    },
+  },
+  interpolation: {
+    escapeValue: false,
   },
 });
 
