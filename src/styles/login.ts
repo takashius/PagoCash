@@ -59,6 +59,15 @@ const loginStyles = StyleSheet.create({
     color: "#007bff",
     fontWeight: "bold",
   },
+  passwordContainer: {
+    position: "relative",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  passwordInput: {
+    flex: 1,
+    backgroundColor: "transparent",
+  },
 });
 
 export default loginStyles;

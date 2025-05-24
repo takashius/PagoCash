@@ -67,5 +67,23 @@
     "transferSummary": "Resumen de transferencia",
     "recipient": "Destinatario",
     "confirmTransfer": "Confirmar transferencia"
+  },
+  "register": {
+    "createAccount": "Crear una cuenta",
+    "name": "Nombre",
+    "namePlaceholder": "Ingresa tu nombre",
+    "lastName": "Apellido",
+    "lastNamePlaceholder": "Ingresa tu apellido",
+    "idNumber": "Cédula",
+    "idNumberPlaceholder": "Ingresa tu número de cédula",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "password": "Clave",
+    "passwordPlaceholder": "Ingresa tu clave",
+    "confirmPassword": "Repetir clave",
+    "confirmPasswordPlaceholder": "Confirma tu clave",
+    "registerButton": "Registrarse",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "loginLink": "Inicia sesión"
   }
 }

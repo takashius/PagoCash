@@ -10,7 +10,8 @@ import Profile from "../screens/Profile";
 import MyQR from "../screens/MyQR";
 import QRScanner from "../components/QRScanner";
 import RechargeScreen from "../screens/Recharge";
-import Login from "../screens/Login";
+import Login from "../screens/auth/Login";
+import Register from "../screens/auth/register";
 import TransferScreen from "../screens/Transfer";
 import { Home, List, User } from "lucide-react-native";
 import { useUser } from "../context/UserContext";
@@ -136,6 +137,11 @@ const AppNavigator = () => {
             <Stack.Screen
               name="Login"
               component={Login}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

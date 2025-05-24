@@ -67,5 +67,23 @@
     "transferSummary": "Transfer summary",
     "recipient": "Recipient",
     "confirmTransfer": "Confirm transfer"
+  },
+  "register": {
+    "createAccount": "Create an account",
+    "name": "First Name",
+    "namePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "idNumber": "ID Number",
+    "idNumberPlaceholder": "Enter your ID number",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "registerButton": "Register",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Sign in"
   }
 }

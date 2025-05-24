@@ -23,15 +23,8 @@ const generalStyles = StyleSheet.create({
     flex: 1,
   },
   input: {
-    height: 50,
-    borderWidth: 1,
-    borderColor: "#CCC",
-    borderRadius: 8,
-    fontSize: 16,
-    paddingHorizontal: 10,
-    backgroundColor: "#FFF",
-    width: "100%",
-    padding: 10,
+    flex: 1,
+    backgroundColor: "transparent",
   },
   cardGrid: {
     flexDirection: "row",
