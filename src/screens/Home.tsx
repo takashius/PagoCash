@@ -75,7 +75,7 @@ export default function HomeScreen() {
                 color="#333"
                 style={generalStyles.cardIcon}
               />
-              <Text style={generalStyles.cardText}>{t('home.recharge')}</Text>
+              <Text style={generalStyles.cardText}>{t('general.recharge')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

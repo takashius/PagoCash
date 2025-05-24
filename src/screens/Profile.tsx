@@ -5,8 +5,10 @@ import { User } from 'lucide-react-native';
 import { useUser } from '../context/UserContext';
 import generalStyles from '../styles/global';
 import profileStyles from '../styles/profile';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
+  const { t } = useTranslation();
   const { logout } = useUser();
 
   const handleLogout = () => {
@@ -27,18 +29,18 @@ const Profile = () => {
         </View>
 
         <View style={profileStyles.profileInfoSection}>
-          <Text style={profileStyles.profileInfoLabel}>Correo:</Text>
+          <Text style={profileStyles.profileInfoLabel}>{t('general.email')}:</Text>
           <Text style={profileStyles.profileInfoValue}>maria.gonzalez@email.com</Text>
 
-          <Text style={profileStyles.profileInfoLabel}>Teléfono:</Text>
+          <Text style={profileStyles.profileInfoLabel}>{t('general.phone')}:</Text>
           <Text style={profileStyles.profileInfoValue}>+58 412 123 4567</Text>
 
-          <Text style={profileStyles.profileInfoLabel}>Cédula:</Text>
+          <Text style={profileStyles.profileInfoLabel}>{t('general.documentId')}:</Text>
           <Text style={profileStyles.profileInfoValue}>V-12345678</Text>
         </View>
 
         <CustomButton onPress={handleLogout}>
-          Cerrar sesión
+          {t('general.logout')}
         </CustomButton>
       </View>
     </View>

@@ -1,7 +1,11 @@
 {
   "general": {
     "welcome": "Welcome to Pago Cash",
-    "recharge": "Recharge"
+    "recharge": "Recharge",
+    "email": "Email",
+    "phone": "Phone",
+    "documentId": "Document Id",
+    "logout": "Logout"
   },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",

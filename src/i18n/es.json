@@ -1,7 +1,11 @@
 {
   "general": {
     "welcome": "Bienvenido a Pago Cash",
-    "recharge": "Recargar"
+    "recharge": "Recargar",
+    "email": "Correo",
+    "phone": "Teléfono",
+    "documentId": "Cédula",
+    "logout": "Cerrar sesión"
   },
   "login": {
     "login_to_continue": "Inicia sesión para continuar con Pago Cash",
