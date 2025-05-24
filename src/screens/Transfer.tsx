@@ -12,6 +12,7 @@ import { Send, Search, User, MessageSquare } from "lucide-react-native";
 import ContactSelector from "../components/ui/contact-selector";
 import generalStyles from "../styles/global";
 import transferStyles from "../styles/transfer";
+import { useTranslation } from "react-i18next";
 
 interface Contact {
   id: string;
@@ -20,6 +21,7 @@ interface Contact {
 }
 
 const TransferScreen: React.FC = () => {
+  const { t } = useTranslation();
   const [currentBalance, setCurrentBalance] = useState<number>(1000.0);
   const [amount, setAmount] = useState<string>("");
   const [recipient, setRecipient] = useState<string>("");
@@ -84,7 +86,7 @@ const TransferScreen: React.FC = () => {
   return (
     <ScrollView style={generalStyles.containerTop}>
       <View style={transferStyles.inputGroup}>
-        <Text style={transferStyles.label}>Monto a transferir</Text>
+        <Text style={transferStyles.label}>{t('transfer.transferAmount')}</Text>
         <View style={transferStyles.inputWrapper}>
           <Text style={transferStyles.inputPrefix}>Bs.</Text>
           <TextInput
@@ -97,12 +99,12 @@ const TransferScreen: React.FC = () => {
           />
         </View>
         <Text style={transferStyles.balanceInfo}>
-          Saldo disponible: <Text style={transferStyles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
+          {t('transfer.availableBalance')}: <Text style={transferStyles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
         </Text>
       </View>
 
       <View style={transferStyles.inputGroup}>
-        <Text style={transferStyles.label}>Método de transferencia</Text>
+        <Text style={transferStyles.label}>{t('transfer.transferMethod')}</Text>
         <View style={transferStyles.paymentMethods}>
           <TouchableOpacity
             style={[
@@ -116,7 +118,7 @@ const TransferScreen: React.FC = () => {
             }}
           >
             <User size={24} color="#333" />
-            <Text style={transferStyles.methodText}>Contacto</Text>
+            <Text style={transferStyles.methodText}>{t('transfer.contact')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -129,7 +131,7 @@ const TransferScreen: React.FC = () => {
             }}
           >
             <Search size={24} color="#333" />
-            <Text style={transferStyles.methodText}>Número de cuenta</Text>
+            <Text style={transferStyles.methodText}>{t('transfer.contact')}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -140,7 +142,7 @@ const TransferScreen: React.FC = () => {
         </View>
       ) : (
         <View style={transferStyles.inputGroup}>
-          <Text style={transferStyles.label}>Número de cuenta</Text>
+          <Text style={transferStyles.label}>{t('transfer.accountNumber')}</Text>
           <TextInput
             style={generalStyles.input}
             value={recipient}
@@ -153,31 +155,31 @@ const TransferScreen: React.FC = () => {
       <View style={transferStyles.inputGroup}>
         <View style={{ flexDirection: "row" }}>
           <MessageSquare size={24} color="#333" />
-          <Text style={[transferStyles.label, { marginLeft: 8 }]}>Mensaje (opcional)</Text>
+          <Text style={[transferStyles.label, { marginLeft: 8 }]}>{t('transfer.optionalMessage')}</Text>
         </View>
         <TextInput
           style={generalStyles.input}
           value={message}
           onChangeText={setMessage}
-          placeholder="Escribe un mensaje para el destinatario"
+          placeholder={t('transfer.writeRecipientMessage')}
         />
       </View>
 
       {amount && recipient && (
         <Card style={transferStyles.summaryCard}>
           <Card.Content>
-            <Text style={transferStyles.summaryTitle}>Resumen de transferencia</Text>
+            <Text style={transferStyles.summaryTitle}>{t('transfer.transferSummary')}</Text>
             <Text style={transferStyles.summaryText}>
-              <Text style={transferStyles.summaryLabel}>Monto: </Text>
+              <Text style={transferStyles.summaryLabel}>{t('general.amount')}: </Text>
               Bs. {parseFloat(amount).toFixed(2)}
             </Text>
             <Text style={transferStyles.summaryText}>
-              <Text style={transferStyles.summaryLabel}>Destinatario: </Text>
+              <Text style={transferStyles.summaryLabel}>{t('transfer.recipient')}: </Text>
               {recipient}
             </Text>
             {message ? (
               <Text style={transferStyles.summaryText}>
-                <Text style={transferStyles.summaryLabel}>Mensaje: </Text>
+                <Text style={transferStyles.summaryLabel}>{t('general.message')}: </Text>
                 {message}
               </Text>
             ) : null}
@@ -192,7 +194,7 @@ const TransferScreen: React.FC = () => {
         disabled={!amount || !recipient}
       >
         <View style={transferStyles.iconAndTextWrapper}>
-          <Text style={transferStyles.primaryButtonText}>Confirmar transferencia</Text>
+          <Text style={transferStyles.primaryButtonText}>{t('transfer.confirmTransfer')}</Text>
           <Send size={20} color="#fff" style={transferStyles.iconStyle} />
         </View>
       </Button>

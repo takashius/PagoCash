@@ -103,7 +103,7 @@ const RechargeScreen: React.FC = () => {
           </View>
           <Text style={rechargeStyles.successTitle}>{t('recharge.topUpSuccess')}</Text>
           <Text style={rechargeStyles.successMessage}>
-            {t("topUpMessage", { amount: parseFloat(amount).toFixed(2) })}
+            {t("recharge.topUpMessage", { amount: parseFloat(amount).toFixed(2) })}
           </Text>
 
           <View style={rechargeStyles.detailsCard}>

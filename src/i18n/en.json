@@ -9,7 +9,8 @@
     "amount": "Amount",
     "date": "Date",
     "continue": "Continue",
-    "bank": "Bank"
+    "bank": "Bank",
+    "message": "Message"
   },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",
@@ -30,7 +31,7 @@
     "transfer": "Transfer"
   },
   "recharge": {
-    "topUpSuccess": "Top up successful!",
+    "topUpSuccess": "Recharge successful!",
     "topUpMessage": "You have recharged Bs. {{amount}} to your account.",
     "method": "Method",
     "card": "Card",
@@ -44,5 +45,17 @@
     "selectBank": "Select a bank",
     "referenceNumber": "Reference number",
     "enterReferenceNumber": "Enter the reference number"
+  },
+  "transfer": {
+    "transferAmount": "Transfer amount",
+    "availableBalance": "Available balance",
+    "transferMethod": "Transfer method",
+    "contact": "Contact",
+    "accountNumber": "Account number",
+    "optionalMessage": "Optional message",
+    "writeRecipientMessage": "Write a message to the recipient",
+    "transferSummary": "Transfer summary",
+    "recipient": "Recipient",
+    "confirmTransfer": "Confirm transfer"
   }
 }

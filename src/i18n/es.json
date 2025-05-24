@@ -9,7 +9,8 @@
     "amount": "Monto",
     "date": "Fecha",
     "continue": "Continuar",
-    "bank": "Banco"
+    "bank": "Banco",
+    "message": "Mensaje"
   },
   "login": {
     "login_to_continue": "Inicia sesión para continuar con Pago Cash",
@@ -44,5 +45,17 @@
     "selectBank": "Selecciona un banco",
     "referenceNumber": "Número de referencia",
     "enterReferenceNumber": "Ingresa el número de referencia"
+  },
+  "transfer": {
+    "transferAmount": "Monto a transferir",
+    "availableBalance": "Saldo disponible",
+    "transferMethod": "Método de transferencia",
+    "contact": "Contacto",
+    "accountNumber": "Número de cuenta",
+    "optionalMessage": "Mensaje (opcional)",
+    "writeRecipientMessage": "Escribe un mensaje para el destinatario",
+    "transferSummary": "Resumen de transferencia",
+    "recipient": "Destinatario",
+    "confirmTransfer": "Confirmar transferencia"
   }
 }
