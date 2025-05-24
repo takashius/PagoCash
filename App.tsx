@@ -15,7 +15,7 @@ export default function App() {
       <PaperProvider>
         <I18nextProvider i18n={i18n}>
           <UserProvider>
-            <StatusBar style="light" translucent={true} backgroundColor="transparent" />
+            <StatusBar translucent={true} backgroundColor="transparent" style="auto" />
             <AppNavigator />
           </UserProvider>
         </I18nextProvider>

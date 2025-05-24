@@ -21,7 +21,8 @@
     "rememberMe": "Recordarme",
     "userOrEmail": "Usuario o Correo",
     "loginButton": "Iniciar Sesión",
-    "noAccount": "¿No tienes una cuenta?"
+    "noAccount": "¿No tienes una cuenta?",
+    "signUp": "Regístrate"
   },
   "menu": {
     "home": "Inicio",

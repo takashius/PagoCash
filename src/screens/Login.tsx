@@ -100,7 +100,7 @@ const Login = () => {
         <Text style={loginStyles.registerPrompt}>
           {t('login.noAccount')}
           <TouchableOpacity>
-            <Text style={[loginStyles.registerLink, { marginLeft: 8 }]}>Regístrate</Text>
+            <Text style={[loginStyles.registerLink, { marginLeft: 8 }]}>{t('login.signUp')}</Text>
           </TouchableOpacity>
         </Text>
       </View>

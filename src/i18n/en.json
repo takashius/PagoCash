@@ -21,7 +21,8 @@
     "rememberMe": "Remember me",
     "userOrEmail": "User or Email",
     "loginButton": "Log in",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
   },
   "menu": {
     "home": "Home",
