@@ -22,7 +22,7 @@ const PasswordRecovery: React.FC = () => {
     // Simular envío de correo de recuperación
     setTimeout(() => {
       alert("Código de verificación enviado.");
-      navigation.navigate("VerifyCode");
+      navigation.navigate("PasswordRecoveryTwo");
     }, 1500);
   };
 

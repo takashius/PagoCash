@@ -93,5 +93,19 @@
     "emailPlaceholder": "Ingresa tu correo",
     "sendButton": "Enviar código",
     "backToLogin": "Volver al inicio de sesión"
+  },
+  "passwordReset": {
+    "title": "Restablecer contraseña",
+    "subtitle": "Ingresa el código de verificación y tu nueva contraseña.",
+    "code": "Código de verificación",
+    "codePlaceholder": "Ingresa el código de 6 dígitos",
+    "newPassword": "Nueva contraseña",
+    "newPasswordPlaceholder": "Ingresa tu nueva contraseña",
+    "confirmPassword": "Repetir contraseña",
+    "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+    "resetButton": "Cambiar contraseña",
+    "passwordMismatch": "Las contraseñas no coinciden.",
+    "success": "Tu contraseña ha sido restablecida correctamente.",
+    "backToLogin": "Volver al inicio de sesión"
   }
 }
