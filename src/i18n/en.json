@@ -13,6 +13,12 @@
     "message": "Message",
     "ok": "OK"
   },
+  "auth": {
+    "loginSuccessTitle": "Login successful",
+    "loginSuccessMessage": "Welcome to UniSAN.",
+    "loginErrorTitle": "Login failed",
+    "loginErrorMessage": "Please check your credentials."
+  },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",
     "usernamePlaceholder": "Enter your username",
