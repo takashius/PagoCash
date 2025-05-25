@@ -8,9 +8,9 @@ import loginStyles from "../../styles/login";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { useLogin, useAccount } from "../../services/auth";
-import Toast from 'react-native-toast-message';
-import SecureStoreManager from "../../components/AsyncStorageManager";
-import errorToast from "../../components/ui/ErrorToast";
+// import Toast from 'react-native-toast-message';
+// import SecureStoreManager from "../../components/AsyncStorageManager";
+// import errorToast from "../../components/ui/ErrorToast";
 
 interface LoginFormData {
   username: string;
@@ -34,37 +34,37 @@ const Login: React.FC = () => {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    loginMutate.mutate(
-      { email: data.username, password: data.password },
-      {
-        onSuccess: async (responseData) => {
-          await SecureStoreManager.setItem<string>("Token", responseData.token);
-          const user = await refetch();
-          if (user.data) {
-            login(user.data);
-            Toast.show({
-              type: 'success',
-              text1: t("auth.loginSuccessTitle"),
-              text2: t("auth.loginSuccessMessage")
-            });
-          } else {
-            Toast.show({
-              type: 'error',
-              text1: t("auth.loginErrorTitle"),
-              text2: t("auth.loginErrorMessage")
-            });
-          }
-        },
-        onError: (error) => {
-          Toast.show({
-            type: 'error',
-            text1: t("auth.loginErrorTitle"),
-            text2: `${errorToast(error)}}`
-          });
-          console.log('Error al hacer login:', error)
-        }
-      }
-    );
+    // loginMutate.mutate(
+    //   { email: data.username, password: data.password },
+    //   {
+    //     onSuccess: async (responseData) => {
+    //       // await SecureStoreManager.setItem<string>("Token", responseData.token);
+    //       const user = await refetch();
+    //       if (user.data) {
+    //         login(user.data);
+    //         Toast.show({
+    //           type: 'success',
+    //           text1: t("auth.loginSuccessTitle"),
+    //           text2: t("auth.loginSuccessMessage")
+    //         });
+    //       } else {
+    //         Toast.show({
+    //           type: 'error',
+    //           text1: t("auth.loginErrorTitle"),
+    //           text2: t("auth.loginErrorMessage")
+    //         });
+    //       }
+    //     },
+    //     onError: (error) => {
+    //       Toast.show({
+    //         type: 'error',
+    //         text1: t("auth.loginErrorTitle"),
+    //         // text2: `${errorToast(error)}}`
+    //       });
+    //       console.log('Error al hacer login:', error)
+    //     }
+    //   }
+    // );
   };
 
   return (

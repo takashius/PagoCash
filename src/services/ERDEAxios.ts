@@ -1,10 +1,10 @@
 import axios from "axios";
 import urlJoin from "url-join";
-import "dotenv/config";
+import { API_URL, API_DEBUG } from "@env";
 
-const DEBUG = process.env.API_DEBUG;
+const DEBUG = API_DEBUG;
 const locale = "es";
-const apiUrl = process.env.API_URL;
+const apiUrl = API_URL;
 
 const ERDEAxios = axios.create();
 
