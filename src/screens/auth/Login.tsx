@@ -114,7 +114,7 @@ const Login: React.FC = () => {
           </View>
 
           {/* Forgot Password alineado a la derecha */}
-          <TouchableOpacity onPress={() => alert("Función de recuperación no implementada")}>
+          <TouchableOpacity onPress={() => navigation.navigate("PasswordRecoveryOne")}>
             <Text style={loginStyles.forgotPassword}>{t("login.forgotPassword")}</Text>
           </TouchableOpacity>
         </View>

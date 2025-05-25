@@ -85,5 +85,13 @@
     "registerButton": "Register",
     "haveAccount": "Already have an account?",
     "loginLink": "Sign in"
+  },
+  "passwordRecovery": {
+    "title": "Password Recovery",
+    "subtitle": "Enter your email to receive a verification code.",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "sendButton": "Send Code",
+    "backToLogin": "Back to Login"
   }
 }

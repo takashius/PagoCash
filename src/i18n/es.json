@@ -85,5 +85,13 @@
     "registerButton": "Registrarse",
     "haveAccount": "¿Ya tienes una cuenta?",
     "loginLink": "Inicia sesión"
+  },
+  "passwordRecovery": {
+    "title": "Recuperar contraseña",
+    "subtitle": "Ingresa tu correo para recibir un código de verificación.",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Ingresa tu correo",
+    "sendButton": "Enviar código",
+    "backToLogin": "Volver al inicio de sesión"
   }
 }
