@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, FlatList } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, Button, Modal, Portal, Card, Avatar, IconButton } from "react-native-paper";
-import { Send, Search, User } from "lucide-react-native";
+import { Dropdown } from "react-native-element-dropdown";
 import generalStyles from "../styles/global";
 import transferStyles from "../styles/transfer";
 import { useTranslation } from "react-i18next";
@@ -40,13 +40,7 @@ const TransferScreen: React.FC = () => {
   const [modalMessage, setModalMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const filteredContacts = mockContacts.filter(
-    (contact) =>
-      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      contact.accountId.includes(searchQuery)
-  );
+  const [selectedValue, setSelectedValue] = useState<string>("");
 
   const handleSelectContact = (contact: Contact) => {
     setSelectedContact(contact);
@@ -95,16 +89,26 @@ const TransferScreen: React.FC = () => {
           />
         </View>
 
-        {/* Campo de búsqueda con icono de lupa */}
         <Text style={transferStyles.label}>{t("transfer.searchRecipient")}</Text>
         <View style={transferStyles.searchContainer}>
-          <TextInput
+          <Dropdown
             style={transferStyles.searchInput}
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            placeholder={t("transfer.enterAccountOrName")}
+            data={mockContacts}
+            labelField="name"
+            valueField="id"
+            placeholder="Buscar usuario..."
+            search
+            value={selectedValue}
+            onChange={(item) => setSelectedValue(item.value)}
+            renderItem={(item) => (
+              <TouchableOpacity onPress={() => handleSelectContact(item)} style={[transferStyles.contactItem, { marginLeft: 10 }]}>
+                <Avatar.Image size={40} source={{ uri: item.photo }} />
+                <View style={transferStyles.contactDetails}>
+                  <Text style={transferStyles.contactName}>{item.name} {item.lastName}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
           />
-          <IconButton icon="magnify" size={24} style={transferStyles.searchIcon} />
         </View>
 
         {/* Listado horizontal de contactos */}
