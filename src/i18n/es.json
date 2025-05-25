@@ -10,7 +10,8 @@
     "date": "Fecha",
     "continue": "Continuar",
     "bank": "Banco",
-    "message": "Mensaje"
+    "message": "Mensaje",
+    "ok": "Aceptar"
   },
   "login": {
     "login_to_continue": "Inicia sesión para continuar con Pago Cash",
@@ -54,7 +55,14 @@
     "expirationDate": "Fecha de expiración (MM/YY)",
     "selectBank": "Selecciona un banco",
     "referenceNumber": "Número de referencia",
-    "enterReferenceNumber": "Ingresa el número de referencia"
+    "enterReferenceNumber": "Ingresa el número de referencia",
+    "invalidAmount": "Por favor ingresa un monto válido.",
+    "selectPaymentMethod": "Por favor selecciona un método de pago.",
+    "invalidCard": "Número de tarjeta inválido.",
+    "invalidExpiry": "Fecha de expiración inválida (MM/YY).",
+    "invalidCvv": "CVV inválido.",
+    "invalidReference": "Número de referencia inválido.",
+    "successMessage": "¡Recarga exitosa! Se han agregado Bs. {{amount}} a tu cuenta."
   },
   "transfer": {
     "transferAmount": "Monto a transferir",

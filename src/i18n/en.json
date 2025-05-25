@@ -10,7 +10,8 @@
     "date": "Date",
     "continue": "Continue",
     "bank": "Bank",
-    "message": "Message"
+    "message": "Message",
+    "ok": "OK"
   },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",
@@ -54,7 +55,14 @@
     "expirationDate": "Expiration date (MM/YY)",
     "selectBank": "Select a bank",
     "referenceNumber": "Reference number",
-    "enterReferenceNumber": "Enter the reference number"
+    "enterReferenceNumber": "Enter the reference number",
+    "invalidAmount": "Please enter a valid amount.",
+    "selectPaymentMethod": "Please select a payment method.",
+    "invalidCard": "Invalid card number.",
+    "invalidExpiry": "Invalid expiration date (MM/YY).",
+    "invalidCvv": "Invalid CVV.",
+    "invalidReference": "Invalid reference number.",
+    "successMessage": "Recharge successful! Bs. {{amount}} has been added to your account."
   },
   "transfer": {
     "transferAmount": "Transfer amount",

@@ -109,6 +109,28 @@ const rechargeStyles = StyleSheet.create({
   snackbar: {
     backgroundColor: "#FF6F61",
   },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 20,
+  },
+  modalContent: {
+    alignItems: "center",
+  },
+  modalMessage: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#333",
+    textAlign: "center",
+    marginVertical: 15,
+  },
+  modalButton: {
+    marginTop: 10,
+    backgroundColor: "#007bff",
+  },
 });
 
 export default rechargeStyles;
