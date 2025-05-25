@@ -1,212 +1,171 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-} from "react-native";
-import { Button, Snackbar, Card } from "react-native-paper";
-import { Send, Search, User, MessageSquare } from "lucide-react-native";
-import ContactSelector from "../components/ui/contact-selector";
+import { View, Text, TouchableOpacity, ScrollView, FlatList } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import { TextInput, Button, Modal, Portal, Card, Avatar, IconButton } from "react-native-paper";
+import { Send, Search, User } from "lucide-react-native";
 import generalStyles from "../styles/global";
 import transferStyles from "../styles/transfer";
 import { useTranslation } from "react-i18next";
 
+interface TransferFormData {
+  amount: string;
+  recipient: string;
+  message?: string;
+}
+
 interface Contact {
   id: string;
   name: string;
+  lastName: string;
   accountId: string;
+  email: string;
+  photo: string;
 }
+
+const mockContacts: Contact[] = [
+  { id: "1", name: "Juan", lastName: "Pérez", accountId: "PC-654321", email: "juan@email.com", photo: "https://via.placeholder.com/100" },
+  { id: "2", name: "Ana", lastName: "López", accountId: "PC-789012", email: "ana@email.com", photo: "https://via.placeholder.com/100" },
+  { id: "3", name: "Carlos", lastName: "Mendoza", accountId: "PC-345678", email: "carlos@email.com", photo: "https://via.placeholder.com/100" },
+];
 
 const TransferScreen: React.FC = () => {
   const { t } = useTranslation();
-  const [currentBalance, setCurrentBalance] = useState<number>(1000.0);
-  const [amount, setAmount] = useState<string>("");
-  const [recipient, setRecipient] = useState<string>("");
-  const [selectedContact, setSelectedContact] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [transferMethod, setTransferMethod] = useState<string>("contact");
-  const [snackbarVisible, setSnackbarVisible] = useState<boolean>(false);
-  const [snackbarMessage, setSnackbarMessage] = useState<string>("");
+  const { control, handleSubmit, setValue, watch } = useForm<TransferFormData>({
+    defaultValues: { amount: "", recipient: "", message: "" },
+  });
 
-  // Lista de contactos simulada
-  const mockContacts: Contact[] = [
-    { id: "1", name: "Juan Pérez", accountId: "PC-654321" },
-    { id: "2", name: "Ana López", accountId: "PC-789012" },
-    { id: "3", name: "Carlos Mendoza", accountId: "PC-345678" },
-    { id: "4", name: "Sofía Rodríguez", accountId: "PC-901234" },
-  ];
+  const [currentBalance, setCurrentBalance] = useState<number>(1000.0);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalMessage, setModalMessage] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const filteredContacts = mockContacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.accountId.includes(searchQuery)
+  );
 
   const handleSelectContact = (contact: Contact) => {
-    Alert.alert("Contacto seleccionado", `Nombre: ${contact.name}`);
+    setSelectedContact(contact);
+    setValue("recipient", contact.accountId);
   };
 
-  const showToast = (message: string) => {
-    setSnackbarMessage(message);
-    setSnackbarVisible(true);
-  };
-
-  const validateTransfer = (): boolean => {
-    const numAmount = parseFloat(amount);
-
-    if (!amount || isNaN(numAmount) || numAmount <= 0) {
-      showToast("Por favor ingresa un monto válido");
-      return false;
+  const handleTransfer = (data: TransferFormData) => {
+    const amount = parseFloat(data.amount);
+    if (amount <= 0 || amount > currentBalance) {
+      setModalMessage(t("transfer.insufficientFunds"));
+      setIsSuccess(false);
+      setShowModal(true);
+      return;
     }
 
-    if (numAmount > currentBalance) {
-      showToast("No tienes saldo suficiente para esta transferencia");
-      return false;
-    }
-
-    if (!recipient) {
-      showToast("Por favor selecciona un destinatario");
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleTransferComplete = (amount: number, recipient: string) => {
-    Alert.alert(
-      "Transferencia exitosa",
-      `Has transferido Bs. ${amount.toFixed(2)} a ${recipient}.`
-    );
-    setCurrentBalance((prevBalance) => prevBalance - amount); // Actualizar saldo
-  };
-
-  const handleSubmit = () => {
-    if (validateTransfer()) {
-      handleTransferComplete(parseFloat(amount), recipient);
-    }
+    setIsProcessing(true);
+    setTimeout(() => {
+      setCurrentBalance((prevBalance) => prevBalance - amount);
+      setModalMessage(t("transfer.successMessage", { amount }));
+      setIsSuccess(true);
+      setShowModal(true);
+      setIsProcessing(false);
+    }, 1500);
   };
 
   return (
-    <ScrollView style={generalStyles.containerTop}>
-      <View style={transferStyles.inputGroup}>
-        <Text style={transferStyles.label}>{t('transfer.transferAmount')}</Text>
-        <View style={transferStyles.inputWrapper}>
-          <Text style={transferStyles.inputPrefix}>Bs.</Text>
-          <TextInput
-            style={generalStyles.input}
-            value={amount}
-            onChangeText={setAmount}
-            placeholder="0.00"
-            keyboardType="numeric"
-            textAlign="right"
+    <View style={generalStyles.container}>
+      <ScrollView style={generalStyles.containerTop}>
+        <Text style={[generalStyles.title, { marginBottom: 20 }]}>{t("transfer.title")}</Text>
+
+        {/* Monto a transferir */}
+        <View style={transferStyles.inputGroup}>
+          <Text style={transferStyles.label}>{t("transfer.transferAmount")}</Text>
+          <Controller
+            name="amount"
+            control={control}
+            render={({ field }) => (
+              <TextInput
+                style={generalStyles.input}
+                value={field.value}
+                onChangeText={field.onChange}
+                keyboardType="numeric"
+                placeholder="0.00"
+              />
+            )}
           />
         </View>
-        <Text style={transferStyles.balanceInfo}>
-          {t('transfer.availableBalance')}: <Text style={transferStyles.balance}>Bs. {currentBalance.toFixed(2)}</Text>
-        </Text>
-      </View>
 
-      <View style={transferStyles.inputGroup}>
-        <Text style={transferStyles.label}>{t('transfer.transferMethod')}</Text>
-        <View style={transferStyles.paymentMethods}>
-          <TouchableOpacity
-            style={[
-              transferStyles.paymentMethod,
-              transferMethod === "contact" && transferStyles.selectedMethod,
-            ]}
-            onPress={() => {
-              setTransferMethod("contact");
-              setRecipient("");
-              setSelectedContact("");
-            }}
-          >
-            <User size={24} color="#333" />
-            <Text style={transferStyles.methodText}>{t('transfer.contact')}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              transferStyles.paymentMethod,
-              transferMethod === "account" && transferStyles.selectedMethod,
-            ]}
-            onPress={() => {
-              setTransferMethod("account");
-              setRecipient("");
-            }}
-          >
-            <Search size={24} color="#333" />
-            <Text style={transferStyles.methodText}>{t('transfer.contact')}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {transferMethod === "contact" ? (
-        <View style={transferStyles.inputGroup}>
-          <ContactSelector contacts={mockContacts} onSelect={handleSelectContact} />
-        </View>
-      ) : (
-        <View style={transferStyles.inputGroup}>
-          <Text style={transferStyles.label}>{t('transfer.accountNumber')}</Text>
+        {/* Campo de búsqueda con icono de lupa */}
+        <Text style={transferStyles.label}>{t("transfer.searchRecipient")}</Text>
+        <View style={transferStyles.searchContainer}>
           <TextInput
-            style={generalStyles.input}
-            value={recipient}
-            onChangeText={setRecipient}
-            placeholder="PC-123456"
+            style={transferStyles.searchInput}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            placeholder={t("transfer.enterAccountOrName")}
           />
+          <IconButton icon="magnify" size={24} style={transferStyles.searchIcon} />
         </View>
-      )}
 
-      <View style={transferStyles.inputGroup}>
-        <View style={{ flexDirection: "row" }}>
-          <MessageSquare size={24} color="#333" />
-          <Text style={[transferStyles.label, { marginLeft: 8 }]}>{t('transfer.optionalMessage')}</Text>
-        </View>
-        <TextInput
-          style={generalStyles.input}
-          value={message}
-          onChangeText={setMessage}
-          placeholder={t('transfer.writeRecipientMessage')}
+        {/* Listado horizontal de contactos */}
+        <FlatList
+          horizontal
+          data={mockContacts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleSelectContact(item)} style={transferStyles.contactItem}>
+              <Avatar.Image size={40} source={{ uri: item.photo }} />
+              <View style={transferStyles.contactDetails}>
+                <Text style={transferStyles.contactName}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          showsHorizontalScrollIndicator={false}
         />
-      </View>
 
-      {amount && recipient && (
-        <Card style={transferStyles.summaryCard}>
-          <Card.Content>
-            <Text style={transferStyles.summaryTitle}>{t('transfer.transferSummary')}</Text>
-            <Text style={transferStyles.summaryText}>
-              <Text style={transferStyles.summaryLabel}>{t('general.amount')}: </Text>
-              Bs. {parseFloat(amount).toFixed(2)}
-            </Text>
-            <Text style={transferStyles.summaryText}>
-              <Text style={transferStyles.summaryLabel}>{t('transfer.recipient')}: </Text>
-              {recipient}
-            </Text>
-            {message ? (
-              <Text style={transferStyles.summaryText}>
-                <Text style={transferStyles.summaryLabel}>{t('general.message')}: </Text>
-                {message}
-              </Text>
-            ) : null}
-          </Card.Content>
-        </Card>
-      )}
-      <Button
-        mode="contained"
-        onPress={handleSubmit}
-        style={transferStyles.primaryButton}
-        contentStyle={transferStyles.buttonContent} // Estilo para la disposición
-        disabled={!amount || !recipient}
-      >
-        <View style={transferStyles.iconAndTextWrapper}>
-          <Text style={transferStyles.primaryButtonText}>{t('transfer.confirmTransfer')}</Text>
-          <Send size={20} color="#fff" style={transferStyles.iconStyle} />
+        {/* Información del contacto seleccionado */}
+        {selectedContact && (
+          <Card style={transferStyles.selectedContactCard}>
+            <Card.Title title={`${selectedContact.name} ${selectedContact.lastName}`} subtitle={selectedContact.email} left={() => <Avatar.Image size={50} source={{ uri: selectedContact.photo }} />} />
+          </Card>
+        )}
+
+        {/* Mensaje opcional */}
+        <Text style={transferStyles.label}>{t("transfer.optionalMessage")}</Text>
+        <Controller
+          name="message"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              style={generalStyles.input}
+              multiline={true}
+              numberOfLines={6}
+              textAlignVertical="top"
+              value={field.value}
+              onChangeText={field.onChange}
+              placeholder={t("transfer.writeRecipientMessage")}
+            />
+          )}
+        />
+
+        {/* Botón de transferencia */}
+        <View style={{ marginTop: 30 }}>
+          <Button mode="contained" onPress={handleSubmit(handleTransfer)} loading={isProcessing}>
+            {t("transfer.confirmTransfer")}
+          </Button>
         </View>
-      </Button>
+      </ScrollView>
 
-      <Snackbar
-        visible={snackbarVisible}
-        onDismiss={() => setSnackbarVisible(false)}
-        duration={3000}
-      >
-        {snackbarMessage}
-      </Snackbar>
-    </ScrollView>
+      {/* Modal de éxito/error */}
+      <Portal>
+        <Modal visible={showModal} onDismiss={() => setShowModal(false)} contentContainerStyle={transferStyles.modalContainer}>
+          <Text style={transferStyles.modalMessage}>{modalMessage}</Text>
+          <Button mode="contained" onPress={() => setShowModal(false)} style={transferStyles.modalButton}>
+            {t("general.ok")}
+          </Button>
+        </Modal>
+      </Portal>
+    </View>
   );
 };
 

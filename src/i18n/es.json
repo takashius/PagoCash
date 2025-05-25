@@ -74,7 +74,13 @@
     "writeRecipientMessage": "Escribe un mensaje para el destinatario",
     "transferSummary": "Resumen de transferencia",
     "recipient": "Destinatario",
-    "confirmTransfer": "Confirmar transferencia"
+    "confirmTransfer": "Confirmar transferencia",
+    "title": "Transferir dinero",
+    "selectRecipient": "Selecciona un destinatario",
+    "insufficientFunds": "Fondos insuficientes para realizar la transferencia.",
+    "successMessage": "¡Transferencia exitosa! Se han enviado Bs. {{amount}}.",
+    "searchRecipient": "Buscar destinatario",
+    "enterAccountOrName": "Nombre o # de cuenta"
   },
   "register": {
     "createAccount": "Crear una cuenta",

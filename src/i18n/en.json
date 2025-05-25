@@ -74,7 +74,17 @@
     "writeRecipientMessage": "Write a message to the recipient",
     "transferSummary": "Transfer summary",
     "recipient": "Recipient",
-    "confirmTransfer": "Confirm transfer"
+    "confirmTransfer": "Confirm transfer",
+    "title": "Transfer Money",
+    "searchRecipient": "Search Recipient",
+    "enterAccountOrName": "Enter account number or name",
+    "insufficientFunds": "Insufficient funds for transfer.",
+    "successMessage": "Transfer successful! Bs. {{amount}} has been sent.",
+    "contactInfo": "Recipient Information",
+    "contactName": "Name",
+    "contactAccount": "Account Number",
+    "contactEmail": "Email",
+    "contactPhoto": "Profile Picture"
   },
   "register": {
     "createAccount": "Create an account",

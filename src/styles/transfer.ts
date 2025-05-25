@@ -59,6 +59,7 @@ const transferStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
+    marginRight: 10,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
@@ -122,6 +123,49 @@ const transferStyles = StyleSheet.create({
   },
   iconStyle: {
     marginLeft: 8,
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 20,
+  },
+  modalMessage: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#333",
+    textAlign: "center",
+    marginVertical: 15,
+  },
+  modalButton: {
+    marginTop: 10,
+    backgroundColor: "#007bff",
+  },
+  selectedContactCard: {
+    marginVertical: 20,
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ccc",
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 15,
+  },
+  searchInput: {
+    flex: 1,
+    height: 40,
+    backgroundColor: "transparent",
+  },
+  searchIcon: {
+    marginLeft: 5,
   },
 });
 
