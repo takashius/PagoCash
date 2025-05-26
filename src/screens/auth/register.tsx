@@ -40,7 +40,7 @@ const Register: React.FC = () => {
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
   const onSubmit = (data: RegisterFormData) => {
-    registerMutate.mutate({ data },
+    registerMutate.mutate(data,
       {
         onSuccess: async (response) => {
           await SecureStoreManager.setItem<string>("Token", response.token);
