@@ -6,20 +6,25 @@ import { useTranslation } from "react-i18next";
 import generalStyles from "../../styles/global";
 import registerStyles from "../../styles/register";
 import { useNavigation } from "@react-navigation/native";
-
-interface RegisterFormData {
-  name: string;
-  lastName: string;
-  idNumber: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { useAccount, useRegister } from "../../services/auth";
+import Toast from "react-native-toast-message";
+import SecureStoreManager from "../../components/AsyncStorageManager";
+import { useUser } from "../../context/UserContext";
+import errorToast from "../../components/ui/ErrorToast";
+import { RegisterFormData } from "../../types";
 
 const Register: React.FC = () => {
   const { t } = useTranslation();
   const navigation: any = useNavigation();
-  const { control, handleSubmit, watch } = useForm<RegisterFormData>({
+  const { login } = useUser();
+  const registerMutate = useRegister();
+  const { refetch } = useAccount();
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
     defaultValues: {
       name: "",
       lastName: "",
@@ -29,20 +34,42 @@ const Register: React.FC = () => {
       confirmPassword: "",
     },
   });
+  const password = watch("password");
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
   const onSubmit = (data: RegisterFormData) => {
-    if (data.password !== data.confirmPassword) {
-      alert("Las contraseñas no coinciden.");
-      return;
-    }
-
-    // Simulación de envío de datos
-    setTimeout(() => {
-      alert("Registro exitoso 🎉");
-    }, 1500);
+    registerMutate.mutate({ data },
+      {
+        onSuccess: async (response) => {
+          await SecureStoreManager.setItem<string>("Token", response.token);
+          const user = await refetch();
+          if (user.data) {
+            login(user.data);
+            Toast.show({
+              type: 'success',
+              text1: t("auth.registerSuccessTitle"),
+              text2: t("auth.registerSuccessMessage")
+            });
+          } else {
+            Toast.show({
+              type: 'error',
+              text1: t("auth.registerErrorTitle"),
+              text2: t("auth.registerErrorMessage")
+            });
+          }
+        },
+        onError: (error) => {
+          Toast.show({
+            type: 'error',
+            text1: t("auth.registerErrorTitle"),
+            text2: `${errorToast(error)}`
+          });
+          console.log('Error al registrarse:', error)
+        },
+      }
+    );
   };
 
   return (
@@ -60,16 +87,21 @@ const Register: React.FC = () => {
           <Controller
             name="name"
             control={control}
+            rules={{
+              required: t("register.nameRequired"),
+            }}
             render={({ field }) => (
               <TextInput
                 label={t("register.name")}
                 placeholder={t("register.namePlaceholder")}
+                autoCapitalize="words"
                 value={field.value}
                 onChangeText={field.onChange}
                 style={generalStyles.input}
               />
             )}
           />
+          {errors.name && <Text style={generalStyles.errorText}>{errors.name.message}</Text>}
         </View>
 
         {/* Apellido */}
@@ -80,6 +112,7 @@ const Register: React.FC = () => {
             render={({ field }) => (
               <TextInput
                 label={t("register.lastName")}
+                autoCapitalize="words"
                 placeholder={t("register.lastNamePlaceholder")}
                 value={field.value}
                 onChangeText={field.onChange}
@@ -94,6 +127,9 @@ const Register: React.FC = () => {
           <Controller
             name="idNumber"
             control={control}
+            rules={{
+              required: t("register.idNumberRequired"),
+            }}
             render={({ field }) => (
               <TextInput
                 label={t("register.idNumber")}
@@ -105,6 +141,7 @@ const Register: React.FC = () => {
               />
             )}
           />
+          {errors.idNumber && <Text style={generalStyles.errorText}>{errors.idNumber.message}</Text>}
         </View>
 
         {/* Correo */}
@@ -112,6 +149,9 @@ const Register: React.FC = () => {
           <Controller
             name="email"
             control={control}
+            rules={{
+              required: t("register.emailRequired"),
+            }}
             render={({ field }) => (
               <TextInput
                 label={t("register.email")}
@@ -124,6 +164,7 @@ const Register: React.FC = () => {
               />
             )}
           />
+          {errors.email && <Text style={generalStyles.errorText}>{errors.email.message}</Text>}
         </View>
 
         {/* Clave */}
@@ -131,6 +172,13 @@ const Register: React.FC = () => {
           <Controller
             name="password"
             control={control}
+            rules={{
+              required: t("register.passwordRequired"),
+              minLength: {
+                value: 7,
+                message: t("register.passwordMinLength"),
+              },
+            }}
             render={({ field }) => (
               <TextInput
                 label={t("register.password")}
@@ -148,6 +196,7 @@ const Register: React.FC = () => {
               />
             )}
           />
+          {errors.password && <Text style={generalStyles.errorText}>{errors.password.message}</Text>}
         </View>
 
         {/* Repetir Clave */}
@@ -155,6 +204,11 @@ const Register: React.FC = () => {
           <Controller
             name="confirmPassword"
             control={control}
+            rules={{
+              required: t("register.passwordRequired"),
+              validate: (value) =>
+                value === password || t("register.passwordMismatchMessage"),
+            }}
             render={({ field }) => (
               <TextInput
                 label={t("register.confirmPassword")}
@@ -172,10 +226,17 @@ const Register: React.FC = () => {
               />
             )}
           />
+          {errors.confirmPassword && (
+            <Text style={generalStyles.errorText}>{errors.confirmPassword.message}</Text>
+          )}
         </View>
 
         {/* Botón de registro */}
-        <Button mode="contained" onPress={handleSubmit(onSubmit)} style={registerStyles.button}>
+        <Button
+          mode="contained"
+          loading={registerMutate.isPending}
+          onPress={handleSubmit(onSubmit)} style={registerStyles.button}
+        >
           {t("register.registerButton")}
         </Button>
 

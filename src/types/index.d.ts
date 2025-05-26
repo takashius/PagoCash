@@ -102,3 +102,12 @@ export interface ProfileUpdateData {
   phone: string;
   password?: string;
 }
+
+export interface RegisterFormData {
+  name: string;
+  lastName: string;
+  idNumber: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}

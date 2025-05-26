@@ -55,6 +55,12 @@ const generalStyles = StyleSheet.create({
   qrContainer: {
     padding: 20,
   },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginTop: 4,
+    fontWeight: "bold",
+  },
 });
 
 export default generalStyles;

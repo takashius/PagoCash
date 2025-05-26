@@ -17,7 +17,11 @@
     "loginSuccessTitle": "Login successful",
     "loginSuccessMessage": "Welcome to UniSAN.",
     "loginErrorTitle": "Login failed",
-    "loginErrorMessage": "Please check your credentials."
+    "loginErrorMessage": "Please check your credentials.",
+    "registerErrorTitle": "Registration failed",
+    "registerSuccessTitle": "Registration successful",
+    "registerSuccessMessage": "Your account has been created successfully.",
+    "registerErrorMessage": "Please fill out all fields."
   },
   "login": {
     "login_to_continue": "Log in to continue with Pago Cash",
@@ -108,7 +112,13 @@
     "confirmPasswordPlaceholder": "Confirm your password",
     "registerButton": "Register",
     "haveAccount": "Already have an account?",
-    "loginLink": "Sign in"
+    "loginLink": "Sign in",
+    "nameRequired": "First name is required.",
+    "idNumberRequired": "ID number is required.",
+    "emailRequired": "Email is required.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 7 characters long.",
+    "passwordMismatch": "Passwords do not match."
   },
   "passwordRecovery": {
     "title": "Password Recovery",

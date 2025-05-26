@@ -17,7 +17,11 @@
     "loginSuccessTitle": "Inicio de sesión exitoso",
     "loginSuccessMessage": "Bienvenido a UniSAN.",
     "loginErrorTitle": "Error en el inicio de sesión",
-    "loginErrorMessage": "Por favor, revisa tus credenciales."
+    "loginErrorMessage": "Por favor, revisa tus credenciales.",
+    "registerErrorTitle": "Error en el registro",
+    "registerSuccessTitle": "Registro exitoso",
+    "registerSuccessMessage": "Tu cuenta ha sido creada correctamente.",
+    "registerErrorMessage": "Por favor, completa todos los campos."
   },
   "login": {
     "login_to_continue": "Inicia sesión para continuar con Pago Cash",
@@ -104,7 +108,13 @@
     "confirmPasswordPlaceholder": "Confirma tu clave",
     "registerButton": "Registrarse",
     "haveAccount": "¿Ya tienes una cuenta?",
-    "loginLink": "Inicia sesión"
+    "loginLink": "Inicia sesión",
+    "nameRequired": "El nombre es obligatorio.",
+    "idNumberRequired": "El número de cédula es obligatorio.",
+    "emailRequired": "El correo electrónico es obligatorio.",
+    "passwordRequired": "La clave es obligatoria.",
+    "passwordMinLength": "La clave debe tener al menos 7 caracteres.",
+    "passwordMismatchMessage": "Las claves no coinciden."
   },
   "passwordRecovery": {
     "title": "Recuperar contraseña",
