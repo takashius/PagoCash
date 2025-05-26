@@ -20,6 +20,7 @@
     "expo": "^53.0.9",
     "expo-barcode-scanner": "^13.0.1",
     "expo-camera": "~16.1.6",
+    "expo-secure-store": "^14.2.3",
     "expo-status-bar": "~2.2.3",
     "expo-updates": "~0.28.13",
     "fs": "^0.0.1-security",

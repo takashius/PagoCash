@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import AppNavigator from './src/navigation/AppNavigator';
 import { UserProvider } from './src/context/UserContext';
 import i18n from './src/i18n';
+import Toast from 'react-native-toast-message';
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ export default function App() {
           <UserProvider>
             <StatusBar translucent={true} backgroundColor="transparent" style="auto" />
             <AppNavigator />
+            <Toast />
           </UserProvider>
         </I18nextProvider>
       </PaperProvider>

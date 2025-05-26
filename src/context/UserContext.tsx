@@ -1,23 +1,18 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-
-type User = {
-  email: string;
-  name: string;
-  token: string;
-};
+import { Account } from '../types';
 
 type UserContextType = {
-  user: User | null;
-  login: (userData: User) => void;
+  user: Account | null;
+  login: (userData: Account) => void;
   logout: () => void;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Account | null>(null);
 
-  const login = (userData: User) => {
+  const login = (userData: Account) => {
     setUser(userData);
   };
 
