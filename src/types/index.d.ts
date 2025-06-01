@@ -54,24 +54,26 @@ export interface UserAccount {
   photo?: string;
   lastName: string;
   email: string;
-}
-
-export interface San {
-  _id: string;
-  name: string;
-  amount: number;
-  frequency: string;
-  paymentDates: Date[];
-  isActive: boolean;
-  active: boolean;
-  members: string[];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  wallet: Wallet;
 }
 
 export interface Account {
   user: UserAccount;
+  transactions: Transaction[];
+}
+
+export interface Wallet {
+  _id: string;
+  balance: number;
+  currency: string;
+}
+
+export interface Transaction {
+  _id: string;
+  amount: number;
+  date: string;
+  type: "recharge" | "transfer";
+  description?: string;
 }
 
 export interface UserProfileResponse {

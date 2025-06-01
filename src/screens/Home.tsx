@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import generalStyles from '../styles/global';
 import homeStyles from '../styles/home';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../context/UserContext';
 
 interface Transaction {
   id: string;
@@ -16,8 +17,8 @@ interface Transaction {
 }
 
 export default function HomeScreen() {
+  const { user } = useUser();
   const { t } = useTranslation();
-  const [balance, setBalance] = useState(1250.75);
   const navigation: any = useNavigation();
   const accountId = "PC-123456";
 
@@ -51,14 +52,14 @@ export default function HomeScreen() {
       date: "2023-06-01T11:20:00",
     },
   ];
-
+  console.log("Usuario actual:", JSON.stringify(user, null, 2));
   return (
     <SafeAreaView style={generalStyles.container}>
       <View style={generalStyles.scrollContainer}>
         <View style={homeStyles.dashboard}>
           <Text style={homeStyles.balanceLabel}>{t('home.balance')}</Text>
           <Text style={homeStyles.balance}>
-            Bs. {balance.toFixed(2)}
+            Bs. {user?.user?.wallet.balance.toFixed(2)}
           </Text>
           <Text style={homeStyles.accountNumber}>
             {t("home.accountNumber", { accountId })}
