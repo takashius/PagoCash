@@ -15,7 +15,7 @@
   },
   "auth": {
     "loginSuccessTitle": "Login successful",
-    "loginSuccessMessage": "Welcome to UniSAN.",
+    "loginSuccessMessage": "Welcome to PagoCash.",
     "loginErrorTitle": "Login failed",
     "loginErrorMessage": "Please check your credentials.",
     "registerErrorTitle": "Registration failed",

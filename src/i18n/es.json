@@ -15,7 +15,7 @@
   },
   "auth": {
     "loginSuccessTitle": "Inicio de sesión exitoso",
-    "loginSuccessMessage": "Bienvenido a UniSAN.",
+    "loginSuccessMessage": "Bienvenido a PagoCash.",
     "loginErrorTitle": "Error en el inicio de sesión",
     "loginErrorMessage": "Por favor, revisa tus credenciales.",
     "registerErrorTitle": "Error en el registro",
