@@ -122,7 +122,10 @@
     "email": "Correo electrónico",
     "emailPlaceholder": "Ingresa tu correo",
     "sendButton": "Enviar código",
-    "backToLogin": "Volver al inicio de sesión"
+    "backToLogin": "Volver al inicio de sesión",
+    "requiredField": "Campo requerido",
+    "codeSentTitle": "Código enviado",
+    "codeSentMessage": "Hemos enviado un código de verificación a tu correo"
   },
   "passwordReset": {
     "title": "Restablecer contraseña",
@@ -136,6 +139,10 @@
     "resetButton": "Cambiar contraseña",
     "passwordMismatch": "Las contraseñas no coinciden.",
     "success": "Tu contraseña ha sido restablecida correctamente.",
-    "backToLogin": "Volver al inicio de sesión"
+    "backToLogin": "Volver al inicio de sesión",
+    "invalidCodeTitle": "Código inválido",
+    "invalidCodeMessage": "El código debe tener 6 dígitos.",
+    "successTitle": "Éxito",
+    "successMessage": "Tu contraseña ha sido actualizada correctamente."
   }
 }

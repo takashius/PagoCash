@@ -126,7 +126,10 @@
     "email": "Email",
     "emailPlaceholder": "Enter your email",
     "sendButton": "Send Code",
-    "backToLogin": "Back to Login"
+    "backToLogin": "Back to Login",
+    "requiredField": "Required Field",
+    "codeSentTitle": "Code Sent",
+    "codeSentMessage": "We have sent a verification code to your email"
   },
   "passwordReset": {
     "title": "Reset Password",
@@ -140,6 +143,10 @@
     "resetButton": "Change Password",
     "passwordMismatch": "Passwords do not match.",
     "success": "Your password has been successfully reset.",
-    "backToLogin": "Back to Login"
+    "backToLogin": "Back to Login",
+    "invalidCodeTitle": "Invalid Code",
+    "invalidCodeMessage": "The code must be 6 digits long.",
+    "successTitle": "Success",
+    "successMessage": "Your password has been updated successfully."
   }
 }

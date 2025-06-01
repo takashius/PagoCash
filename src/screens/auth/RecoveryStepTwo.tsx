@@ -3,9 +3,11 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, Button } from "react-native-paper";
 import { useTranslation } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
 import generalStyles from "../../styles/global";
 import passwordResetStyles from "../../styles/passwordReset";
+import { useRecoveryTwo } from "../../services/auth";
+import Toast from "react-native-toast-message";
+import errorToast from "../../components/ui/ErrorToast";
 
 interface PasswordResetFormData {
   code: string;
@@ -13,9 +15,15 @@ interface PasswordResetFormData {
   confirmPassword: string;
 }
 
-const PasswordReset: React.FC = () => {
+interface VerificationStepProps {
+  route: any;
+  navigation: any;
+}
+
+const PasswordReset: React.FC<VerificationStepProps> = ({ navigation, route }) => {
   const { t } = useTranslation();
-  const navigation: any = useNavigation();
+  const { email } = route.params;
+  const recoveryMutate = useRecoveryTwo();
   const { control, handleSubmit, watch } = useForm<PasswordResetFormData>({
     defaultValues: {
       code: "",
@@ -26,18 +34,39 @@ const PasswordReset: React.FC = () => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const newPassword = watch("newPassword");
 
   const onSubmit = (data: PasswordResetFormData) => {
-    if (data.newPassword !== data.confirmPassword) {
-      alert(t("passwordReset.passwordMismatch"));
+    if (data.code.length !== 6) {
+      Toast.show({
+        type: 'error',
+        text1: t("passwordReset.invalidCodeTitle"),
+        text2: t("passwordReset.invalidCodeMessage")
+      });
       return;
     }
 
-    // Simular cambio de contraseña
-    setTimeout(() => {
-      alert(t("passwordReset.success"));
-      navigation.navigate("Login");
-    }, 1500);
+    recoveryMutate.mutate(
+      { code: Number(data.code), email, newPass: data.newPassword },
+      {
+        onSuccess: () => {
+          Toast.show({
+            type: 'success',
+            text1: t("passwordReset.successTitle"),
+            text2: t("passwordReset.successMessage")
+          });
+          navigation.navigate("Login");
+        },
+        onError: (error) => {
+          Toast.show({
+            type: 'error',
+            text1: "Error",
+            text2: `${errorToast(error)}`
+          });
+          console.log('Error:', error)
+        },
+      }
+    );
   };
 
   return (
@@ -99,6 +128,11 @@ const PasswordReset: React.FC = () => {
           <Controller
             name="confirmPassword"
             control={control}
+            rules={{
+              required: t("passwordReset.requiredField"),
+              validate: (value) =>
+                value === newPassword || t("register.passwordMismatchMessage"),
+            }}
             render={({ field }) => (
               <TextInput
                 label={t("passwordReset.confirmPassword")}
@@ -119,7 +153,13 @@ const PasswordReset: React.FC = () => {
         </View>
 
         {/* Botón de cambiar contraseña */}
-        <Button mode="contained" onPress={handleSubmit(onSubmit)} style={passwordResetStyles.button}>
+        <Button
+          mode="contained"
+          onPress={handleSubmit(onSubmit)}
+          style={passwordResetStyles.button}
+          loading={recoveryMutate.isPending}
+          disabled={recoveryMutate.isPending}
+        >
           {t("passwordReset.resetButton")}
         </Button>
 
